@@ -74,14 +74,17 @@
   }
   window.addEventListener('beforeprint', function () { document.documentElement.classList.add('reveal-fallback'); });
 
-  /* ---------- Parallax: fondo sección registro ---------- */
-  var regBg = document.querySelector('.registro__bg');
-  if (regBg && !window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
-    var regSection = document.getElementById('registro');
+  /* ---------- Parallax: hero + registro ---------- */
+  if (!window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    var parallaxItems = [
+      { bg: document.querySelector('.hero__bg'),     section: document.getElementById('top'),       speed: 0.10 },
+      { bg: document.querySelector('.registro__bg'), section: document.getElementById('registro'),  speed: 0.10 }
+    ];
     var onScroll = function () {
-      var rect = regSection.getBoundingClientRect();
-      var speed = 0.10;
-      regBg.style.transform = 'translateY(' + (rect.top * speed) + 'px)';
+      parallaxItems.forEach(function (p) {
+        if (!p.bg) return;
+        p.bg.style.transform = 'translateY(' + (p.section.getBoundingClientRect().top * p.speed) + 'px)';
+      });
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
