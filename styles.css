@@ -175,6 +175,7 @@ a{color:inherit;text-decoration:none;}
   inset:-25% 0;
   background:url('assets/registro-bg.jpg') center/cover no-repeat;
   will-change:transform;
+  transition:transform .1s linear;
   z-index:0;
 }
 .registro__bg::after{

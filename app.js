@@ -80,7 +80,7 @@
     var regSection = document.getElementById('registro');
     var onScroll = function () {
       var rect = regSection.getBoundingClientRect();
-      var speed = 0.25;
+      var speed = 0.10;
       regBg.style.transform = 'translateY(' + (rect.top * speed) + 'px)';
     };
     window.addEventListener('scroll', onScroll, { passive: true });
