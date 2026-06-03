@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "lang": "es",
+    "title": "Impulso y oportunidad | Savills",
+    "description": "Únete a Savills en una jornada sobre el futuro de las oficinas. Impulso y oportunidad para tu negocio.",
+    "favicon": "assets/img/favicon.svg"
+  },
+  "brand": {
+    "logoText": "savills",
+    "website": "https://www.savills.es",
+    "websiteLabel": "Visita Savills.es"
+  },
+  "nav": {
+    "links": [
+      { "label": "El evento", "href": "#info" },
+      { "label": "Agenda", "href": "#agenda" },
+      { "label": "Ponentes", "href": "#ponentes" },
+      { "label": "Registro", "href": "#registro" }
+    ],
+    "cta": { "label": "Regístrate", "href": "#registro" }
+  },
+  "hero": {
+    "overline": "OFICINAS",
+    "title": "Impulso y oportunidad",
+    "subtitle": "El encuentro de referencia sobre el futuro del espacio de trabajo.",
+    "backgroundImage": "",
+    "highlights": [
+      { "icon": "calendar", "label": "Fecha", "value": "25 de septiembre, 2026" },
+      { "icon": "clock", "label": "Hora", "value": "09:45 – 14:30h" },
+      { "icon": "pin", "label": "Lugar", "value": "Savills, Madrid" }
+    ]
+  },
+  "event": {
+    "datetime": "2026-09-25T09:45:00",
+    "endDatetime": "2026-09-25T14:30:00",
+    "timezone": "Europe/Madrid",
+    "name": "Impulso y oportunidad",
+    "location": "Savills, Calle de María de Molina 39, 28006 Madrid",
+    "locationShort": "Savills, Madrid",
+    "description": "Descubre nuestra visión sobre el futuro de las oficinas. Con más de una década de experiencia, en Savills acompañamos a las empresas a transformar sus espacios en ventajas competitivas. Una mañana de tendencias, datos de mercado y conversación estratégica junto a profesionales del sector."
+  },
+  "countdown": {
+    "labels": { "days": "Días", "hours": "Horas", "minutes": "Minutos", "seconds": "Segundos" }
+  },
+  "agenda": {
+    "title": "Agenda",
+    "intro": "El programa de la jornada.",
+    "items": [
+      { "time": "09:45h", "title": "Recepción y bienvenida", "description": "Acreditación de asistentes y café de networking." },
+      { "time": "11:00h", "title": "El futuro de las oficinas", "description": "Tendencias de mercado y nuevos modelos de espacio de trabajo." },
+      { "time": "12:45h", "title": "Mesa redonda", "description": "Conversación con líderes del sector inmobiliario corporativo." },
+      { "time": "14:30h", "title": "Almuerzo y cierre", "description": "Networking distendido para cerrar la jornada." }
+    ]
+  },
+  "calendar": {
+    "title": "Añadir al calendario",
+    "providers": ["google", "apple", "outlook"]
+  },
+  "speakers": {
+    "title": "Ponentes",
+    "intro": "Las voces que marcarán la jornada.",
+    "people": [
+      { "name": "Elena Marqués", "role": "Chief Financial Officer", "company": "Savills", "photo": "assets/img/speakers/speaker-1.jpg" },
+      { "name": "Phillip Ekstrom", "role": "Head of Technology", "company": "Savills", "photo": "assets/img/speakers/speaker-2.jpg" },
+      { "name": "Abram Culhane", "role": "Head of Workplace", "company": "Savills", "photo": "assets/img/speakers/speaker-3.jpg" }
+    ]
+  },
+  "registration": {
+    "title": "Registro",
+    "subtitle": "Formulario de registro",
+    "intro": "Completa tus datos para asegurar tu plaza. Las plazas son limitadas.",
+    "endpoint": "",
+    "method": "POST",
+    "successMessage": "¡Gracias por tu registro! Te enviaremos la confirmación a tu correo corporativo.",
+    "submitLabel": "Confirmar registro",
+    "fields": [
+      { "name": "fullName", "label": "Nombre y apellidos", "type": "text", "required": true, "autocomplete": "name" },
+      { "name": "company", "label": "Compañía", "type": "text", "required": true, "autocomplete": "organization" },
+      { "name": "jobTitle", "label": "Cargo", "type": "text", "required": true, "autocomplete": "organization-title" },
+      { "name": "email", "label": "Email corporativo", "type": "email", "required": true, "autocomplete": "email" },
+      { "name": "notes", "label": "Notas", "type": "textarea", "required": false, "placeholder": "¿Algo que quieras comentarnos? (opcional)" }
+    ],
+    "consent": "Acepto que Savills trate mis datos para gestionar mi asistencia a este evento."
+  },
+  "footer": {
+    "logoText": "savills",
+    "website": "https://www.savills.es",
+    "websiteLabel": "Visita Savills.es",
+    "copyright": "© 2026 Savills Spain. All rights reserved.",
+    "social": [
+      { "network": "instagram", "url": "https://www.instagram.com/savills" },
+      { "network": "linkedin", "url": "https://www.linkedin.com/company/savills" },
+      { "network": "youtube", "url": "https://www.youtube.com/savills" }
+    ]
+  }
+}
