@@ -7,14 +7,12 @@
   <meta name="description" content="Únete a Savills en una jornada sobre el futuro de las oficinas." />
   <meta name="robots" content="index,follow" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Impulso y oportunidad | Savills" />
   <meta property="og:description" content="El encuentro de referencia sobre el futuro del espacio de trabajo." />
 
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -22,92 +20,68 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-  <!-- ===================== TOP BAR ===================== -->
-  <header class="topbar" id="topbar" data-region="topbar">
-    <div class="container topbar__inner">
+  <!-- ===================== HERO (incluye top bar + menú) ===================== -->
+  <header class="hero" id="top" data-region="hero">
+    <div class="hero__bar">
       <a class="logo" href="#top" data-bind="brand.logoText" aria-label="Savills">savills</a>
+      <a class="btn btn--solid hero__register" data-region="nav-cta" href="#registro">Registro</a>
+    </div>
 
-      <nav class="nav" id="primary-nav" aria-label="Navegación principal">
-        <ul class="nav__list" data-region="nav-links"></ul>
-        <a class="btn btn--solid nav__cta" data-region="nav-cta" href="#registro">Regístrate</a>
+    <div class="hero__center">
+      <span class="hero__logo logo" data-bind="brand.logoText">savills</span>
+      <p class="hero__overline" data-bind="hero.overline">OFICINAS</p>
+      <h1 class="hero__title" data-bind="hero.title">Impulso y oportunidad</h1>
+      <nav class="hero__nav" aria-label="Navegación principal">
+        <ul class="hero__nav-list" data-region="nav-links"></ul>
       </nav>
-
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Abrir menú">
-        <span></span><span></span><span></span>
-      </button>
     </div>
   </header>
 
-  <main id="top">
-    <!-- ===================== HERO ===================== -->
-    <section class="hero" data-region="hero">
-      <div class="hero__overlay"></div>
-      <div class="container hero__content">
-        <p class="hero__overline" data-bind="hero.overline">OFICINAS</p>
-        <h1 class="hero__title" data-bind="hero.title">Impulso y oportunidad</h1>
-        <p class="hero__subtitle" data-bind="hero.subtitle"></p>
-        <ul class="highlights highlights--hero" data-region="hero-highlights"></ul>
-      </div>
-      <a class="hero__scroll" href="#info" aria-label="Desplázate hacia abajo"></a>
-    </section>
-
-    <!-- ===================== INFO ===================== -->
-    <section class="info section" id="info">
+  <main>
+    <!-- ===================== INFO (cuenta atrás + descripción + highlights) ===================== -->
+    <section class="section info" id="info">
       <div class="container">
         <div class="countdown" data-region="countdown" aria-live="polite"></div>
 
-        <div class="info__grid">
-          <div class="info__main">
-            <p class="overline" data-bind="hero.overline">OFICINAS</p>
-            <h2 class="section__title" data-bind="event.name">Nombre del evento</h2>
-            <p class="info__desc" data-bind="event.description"></p>
-            <a class="btn btn--solid" href="#registro">Quiero asistir</a>
-          </div>
-          <aside class="info__aside">
-            <ul class="highlights highlights--card" data-region="info-highlights"></ul>
-          </aside>
+        <div class="info__intro">
+          <h2 class="block-title" data-bind="event.name">Nombre del evento</h2>
+          <p class="info__desc" data-bind="event.description"></p>
         </div>
+
+        <div class="highlights-bar" data-region="highlights"></div>
       </div>
     </section>
 
     <!-- ===================== AGENDA ===================== -->
-    <section class="agenda section section--alt" id="agenda">
+    <section class="section agenda" id="agenda">
       <div class="container">
-        <header class="section__head">
-          <p class="overline">Programa</p>
-          <h2 class="section__title" data-bind="agenda.title">Agenda</h2>
-          <p class="section__intro" data-bind="agenda.intro"></p>
-        </header>
-        <ol class="timeline" data-region="agenda"></ol>
-
-        <div class="calendar">
-          <h3 class="calendar__title" data-bind="calendar.title">Añadir al calendario</h3>
-          <div class="calendar__btns" data-region="calendar"></div>
-        </div>
+        <h2 class="block-title" data-bind="agenda.title">Agenda</h2>
+        <div class="agenda__grid" data-region="agenda"></div>
       </div>
     </section>
 
-    <!-- ===================== SPEAKERS ===================== -->
-    <section class="speakers section" id="ponentes">
+    <!-- ===================== AÑADIR AL CALENDARIO ===================== -->
+    <section class="section calendar" id="calendario">
       <div class="container">
-        <header class="section__head">
-          <p class="overline">Speakers</p>
-          <h2 class="section__title" data-bind="speakers.title">Ponentes</h2>
-          <p class="section__intro" data-bind="speakers.intro"></p>
-        </header>
+        <h2 class="block-title" data-bind="calendar.title">Añadir al calendario</h2>
+        <div class="calendar__btns" data-region="calendar"></div>
+      </div>
+    </section>
+
+    <!-- ===================== PONENTES ===================== -->
+    <section class="section speakers" id="ponentes">
+      <div class="container">
+        <h2 class="block-title" data-bind="speakers.title">Ponentes</h2>
         <div class="speakers__grid" data-region="speakers"></div>
       </div>
     </section>
 
-    <!-- ===================== REGISTRATION ===================== -->
-    <section class="registro section section--dark" id="registro">
-      <div class="container registro__grid">
-        <div class="registro__intro">
-          <p class="overline overline--light" data-bind="registration.title">Registro</p>
-          <h2 class="section__title section__title--light" data-bind="registration.subtitle">Formulario de registro</h2>
-          <p class="section__intro section__intro--light" data-bind="registration.intro"></p>
-          <ul class="highlights highlights--light" data-region="reg-highlights"></ul>
-        </div>
+    <!-- ===================== REGISTRO ===================== -->
+    <section class="section registro" id="registro">
+      <div class="container">
+        <p class="block-overline" data-bind="registration.title">Registro</p>
+        <h2 class="block-title" data-bind="registration.subtitle">Formulario de registro</h2>
+        <p class="block-intro" data-bind="registration.intro"></p>
         <div class="registro__formwrap">
           <form class="form" id="registerForm" novalidate data-region="form"></form>
           <div class="form__success" id="formSuccess" role="status" hidden></div>
@@ -116,18 +90,16 @@
     </section>
   </main>
 
-  <!-- ===================== FOOTER ===================== -->
+  <!-- ===================== FOOTER (amarillo) ===================== -->
   <footer class="footer" data-region="footer">
     <div class="container footer__inner">
-      <div class="footer__brand">
-        <span class="logo logo--dark" data-bind="footer.logoText">savills</span>
-        <a class="footer__site" data-region="footer-site" href="#"></a>
-      </div>
-      <ul class="social" data-region="social"></ul>
-    </div>
-    <div class="footer__bar">
-      <div class="container">
+      <div class="footer__left">
+        <span class="footer__logo" data-bind="footer.logoText">savills</span>
         <p class="footer__copy" data-bind="footer.copyright"></p>
+      </div>
+      <div class="footer__right">
+        <a class="footer__site" data-region="footer-site" href="#"></a>
+        <ul class="social" data-region="social"></ul>
       </div>
     </div>
   </footer>

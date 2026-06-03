@@ -62,19 +62,18 @@
   }
 
   /* --------------------------- Highlights ----------------------------- */
-  function hlItem(h) {
-    var li = el("li", "hl");
-    li.innerHTML =
-      '<span class="hl__icon">' + (ICON[h.icon] || ICON.pin) + "</span>" +
-      '<span class="hl__text"><span class="hl__label">' + esc(h.label) + "</span>" +
-      '<span class="hl__value">' + esc(h.value) + "</span></span>";
-    return li;
-  }
+  /* Una sola barra blanca con N columnas (Fecha / Hora / Lugar). */
   function renderHighlights(data) {
+    var box = $('[data-region="highlights"]');
+    if (!box) return;
     var items = data.hero.highlights || [];
-    ["hero-highlights", "info-highlights", "reg-highlights"].forEach(function (region) {
-      var box = $('[data-region="' + region + '"]');
-      if (box) items.forEach(function (h) { box.appendChild(hlItem(h)); });
+    items.forEach(function (h) {
+      var cell = el("div", "hl");
+      cell.innerHTML =
+        '<span class="hl__icon">' + (ICON[h.icon] || ICON.pin) + "</span>" +
+        '<span class="hl__text"><span class="hl__label">' + esc(h.label) + "</span>" +
+        '<span class="hl__value">' + esc(h.value) + "</span></span>";
+      box.appendChild(cell);
     });
   }
 
@@ -123,16 +122,17 @@
   }
 
   /* ----------------------------- Agenda ------------------------------- */
+  /* Fila horizontal de tarjetas blancas: título/descr. arriba, hora abajo. */
   function renderAgenda(data) {
     var box = $('[data-region="agenda"]');
     (data.agenda.items || []).forEach(function (it) {
-      var li = el("li", "tl reveal");
-      li.innerHTML =
-        '<span class="tl__dot"></span>' +
-        '<div class="tl__body"><div class="tl__time">' + esc(it.time) + "</div>" +
-        '<h3 class="tl__title">' + esc(it.title) + "</h3>" +
-        '<p class="tl__desc">' + esc(it.description || "") + "</p></div>";
-      box.appendChild(li);
+      var card = el("article", "ag-card reveal");
+      card.innerHTML =
+        '<div class="ag-card__top">' +
+        '<h3 class="ag-card__title">' + esc(it.title) + "</h3>" +
+        '<p class="ag-card__desc">' + esc(it.description || "") + "</p></div>" +
+        '<div class="ag-card__time">' + esc(it.time) + "</div>";
+      box.appendChild(card);
     });
   }
 
@@ -184,11 +184,11 @@
     (data.speakers.people || []).forEach(function (p) {
       var card = el("article", "speaker reveal");
       card.innerHTML =
-        '<div class="speaker__photo"><img src="' + esc(p.photo) + '" alt="' + esc(p.name) +
-        '" loading="lazy" width="600" height="600"></div>' +
-        '<div class="speaker__body"><h3 class="speaker__name">' + esc(p.name) + "</h3>" +
-        '<p class="speaker__role">' + esc(p.role) + "</p>" +
-        (p.company ? '<span class="speaker__company">' + esc(p.company) + "</span>" : "") +
+        '<img class="speaker__img" src="' + esc(p.photo) + '" alt="' + esc(p.name) +
+        '" loading="lazy" width="600" height="600">' +
+        '<div class="speaker__overlay">' +
+        '<h3 class="speaker__name">' + esc(p.name) + "</h3>" +
+        '<p class="speaker__role">' + esc(p.role) + (p.company ? " · " + esc(p.company) : "") + "</p>" +
         "</div>";
       box.appendChild(card);
     });
@@ -282,23 +282,8 @@
 
   /* --------------------- Interactions (chrome) ------------------------ */
   function initChrome() {
-    var topbar = $("#topbar");
-    var onScroll = function () { topbar.classList.toggle("is-solid", window.scrollY > 40); };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    var toggle = $("#navToggle");
-    toggle.addEventListener("click", function () {
-      var open = document.body.classList.toggle("nav-open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
-    });
-    $all("#primary-nav a").forEach(function (a) {
-      a.addEventListener("click", function () {
-        document.body.classList.remove("nav-open");
-        toggle.setAttribute("aria-expanded", "false");
-      });
-    });
+    /* La navegación vive dentro del hero (sin barra fija ni menú hamburguesa),
+       fiel a la estructura del diseño. Solo dejamos el scroll suave nativo (CSS). */
   }
 
   function initReveal() {

@@ -14,10 +14,9 @@
     "links": [
       { "label": "El evento", "href": "#info" },
       { "label": "Agenda", "href": "#agenda" },
-      { "label": "Ponentes", "href": "#ponentes" },
-      { "label": "Registro", "href": "#registro" }
+      { "label": "Ponentes", "href": "#ponentes" }
     ],
-    "cta": { "label": "Regístrate", "href": "#registro" }
+    "cta": { "label": "Registro", "href": "#registro" }
   },
   "hero": {
     "overline": "OFICINAS",
