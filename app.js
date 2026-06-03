@@ -74,6 +74,19 @@
   }
   window.addEventListener('beforeprint', function () { document.documentElement.classList.add('reveal-fallback'); });
 
+  /* ---------- Parallax: fondo sección registro ---------- */
+  var regBg = document.querySelector('.registro__bg');
+  if (regBg && !window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    var regSection = document.getElementById('registro');
+    var onScroll = function () {
+      var rect = regSection.getBoundingClientRect();
+      var speed = 0.25;
+      regBg.style.transform = 'translateY(' + (rect.top * speed) + 'px)';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
   /* ---------- Add to calendar ---------- */
   function toUTC(dstr) {
     var d = new Date(dstr);
