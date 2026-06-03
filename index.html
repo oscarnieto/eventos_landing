@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OFICINAS · Impulso y oportunidad — Savills</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="page">
+
+  <!-- ============ HERO PANEL (with overlay nav) ============ -->
+  <section class="hero panel" id="top">
+    <nav class="nav">
+      <a class="nav__logo" href="#top" aria-label="Savills">
+        <img src="assets/savills-logo.svg" alt="Savills">
+      </a>
+      <div class="nav__right">
+        <a class="nav__cta" href="#registro">Registro</a>
+      </div>
+    </nav>
+
+    <div class="hero__content">
+      <div class="oplogo reveal">
+        <div class="oplogo__words"><span class="l1">OFFICE</span><span class="l2">PULSE</span></div>
+        <div class="oplogo__mark">
+          <svg class="skyline" viewBox="0 0 66.886 34.367" fill="currentColor" aria-hidden="true"><path d="M65.644 29.5c-.358 0-.692.161-.934.444H58.644v-5.285h-3.175l-2.511 1.58h-1.787v-4.393H41.598V0h-8.143v21.846h-4.699v2.298h-2.334v-4.618h-4.853L18.392 2.688l-.016-.081L14.998.794 10.81 29.305l-.006 3.34H0v1.722h12.554v-4.89L16.372 3.493l.436.233 3.305 17.523h4.558v4.617h5.838v-2.297h4.698V1.722h4.642v21.847h9.573v4.393h4.05l2.511-1.581h.91v5.285h7.969c.227.183.5.281.78.281a1.244 1.244 0 0 0 0-2.449l.002.002z"/></svg>
+          <svg class="virtual" viewBox="0 0 44.774 6.996" fill="currentColor" aria-hidden="true"><path d="M3.073 6.937 0 .049h.579l2.734 6.292L6.057.049h.548L3.532 6.937h-.459zM8.252 6.889V.049h.519v6.84h-.519zM11.02 6.889V.049h2.933c.858 0 1.547.264 1.966.674.329.323.529.782.529 1.27v.02c0 1.143-.868 1.798-2.046 1.954l2.305 2.922h-.658l-2.225-2.834h-2.285v2.834h-.519zm.519-3.293h2.354c1.168 0 2.036-.577 2.036-1.564v-.019c0-.919-.738-1.495-2.006-1.495h-2.384v3.078zM20.167 6.889V.518h-2.434V.049h5.388v.469h-2.435v6.371h-.519zM27.498 6.996c-1.676 0-2.864-1.036-2.864-2.951V.049h.519v3.947c0 1.613.888 2.541 2.365 2.541 1.417 0 2.325-.84 2.325-2.492V.049h.519v3.938c0 1.964-1.168 3.009-2.864 3.009zM31.573 6.889 34.826 0h.498l3.253 6.889h-.569l-.888-1.916H33l-.888 1.916h-.539zm1.646-2.375h3.682L35.065.557l-1.846 3.957zM40.154 6.889V.049h.519V6.42h4.101v.469h-4.62z"/></svg>
+        </div>
+      </div>
+
+      <h1 class="hero__title reveal d1">Oficinas</h1>
+      <p class="hero__sub reveal d1">Impulso y oportunidad</p>
+
+      <dl class="hero__meta reveal d2">
+        <div><dt>25 junio 2026</dt><dd>Fecha</dd></div>
+        <div><dt>09:30 – 14:00h</dt><dd>Hora</dd></div>
+        <div><dt>Madrid · Castellana 81</dt><dd>Lugar</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ INFO PANEL ============ -->
+  <section class="info panel" id="evento">
+    <div class="info__inner">
+
+      <!-- countdown -->
+      <div class="clock reveal" id="clock" data-target="2026-06-25T09:30:00">
+        <div class="clock__unit"><span class="clock__num" data-unit="days">00</span><span class="clock__lbl">días</span></div>
+        <div class="clock__unit"><span class="clock__num" data-unit="hours">00</span><span class="clock__lbl">horas</span></div>
+        <div class="clock__unit"><span class="clock__num" data-unit="mins">00</span><span class="clock__lbl">minutos</span></div>
+        <div class="clock__unit"><span class="clock__num" data-unit="secs">00</span><span class="clock__lbl">segundos</span></div>
+      </div>
+
+      <!-- event name + description -->
+      <div class="about reveal">
+        <h2 class="sec-title">El futuro de las oficinas</h2>
+        <p class="about__desc">Una mañana junto a Savills Research y los protagonistas del sector para leer el mercado de oficinas con datos: ocupación, rentas prime, flexibilidad y el peso de la sostenibilidad en cada decisión de inversión. Plazas limitadas y sin coste de inscripción.</p>
+      </div>
+
+      <!-- highlights pill -->
+      <dl class="highlights reveal">
+        <div class="highlights__item"><dt>25 jun 2026</dt><dd>Fecha</dd></div>
+        <div class="highlights__item"><dt>09:30 – 14:00h</dt><dd>Hora</dd></div>
+        <div class="highlights__item"><dt>Castellana 81, Madrid</dt><dd>Lugar</dd></div>
+      </dl>
+
+      <!-- agenda -->
+      <div class="block" id="agenda">
+        <h2 class="sec-title reveal">Agenda</h2>
+        <div class="stats" id="stats"><!-- cards injected --></div>
+      </div>
+
+      <!-- add to calendar -->
+      <div class="block" id="calendario">
+        <h2 class="sec-title reveal">Añadir al calendario</h2>
+        <div class="calbtns reveal d1">
+          <button class="calbtn" data-cal="outlook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14"/><path d="m3 7 9 6 9-6"/></svg>Outlook</button>
+          <button class="calbtn" data-cal="google">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18"/><path d="M3 9h18M8 2v4M16 2v4M12 12v5M9.5 14.5h5"/></svg>Google Calendar</button>
+          <button class="calbtn" data-cal="apple">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.9c0-2 1.6-2.9 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.3-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.4 0-2.6.8-3.3 2-1.4 2.4-.4 6 1 7.9.7.9 1.4 2 2.4 1.9.9 0 1.3-.6 2.4-.6 1.1 0 1.4.6 2.4.6 1 0 1.6-.9 2.3-1.8.7-1 1-2 1-2-.1 0-2-.7-2-3.4ZM14.6 6.3c.5-.6.8-1.5.7-2.3-.7 0-1.6.5-2.1 1.1-.5.5-.9 1.4-.8 2.2.8.1 1.6-.4 2.2-1Z"/></svg>Apple Calendar</button>
+        </div>
+      </div>
+
+      <!-- speakers -->
+      <div class="block" id="ponentes">
+        <h2 class="sec-title reveal">Ponentes</h2>
+        <div class="speakers">
+          <figure class="spk reveal">
+            <image-slot id="spk-1" shape="rect" fit="cover" src="assets/speaker-1.jpg" placeholder="Foto del ponente"></image-slot>
+            <figcaption class="spk__cap"><div class="name">Carter Botosh</div><div class="role">Chief Financial Officer</div></figcaption>
+          </figure>
+          <figure class="spk reveal d1">
+            <image-slot id="spk-2" shape="rect" fit="cover" src="assets/speaker-2.jpg" placeholder="Foto del ponente"></image-slot>
+            <figcaption class="spk__cap"><div class="name">Phillip Ekstrom</div><div class="role">Head of Technology</div></figcaption>
+          </figure>
+          <figure class="spk reveal d2">
+            <image-slot id="spk-3" shape="rect" fit="cover" src="assets/speaker-3.jpg" placeholder="Foto del ponente"></image-slot>
+            <figcaption class="spk__cap"><div class="name">Abram Culhane</div><div class="role">Head of Technology</div></figcaption>
+          </figure>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ REGISTRO PANEL ============ -->
+  <section class="registro panel" id="registro">
+    <div class="registro__inner">
+      <span class="registro__kicker reveal">Registro</span>
+      <h2 class="sec-title reveal">Formulario de registro</h2>
+
+      <form class="form reveal d1" id="reg-form" novalidate>
+        <div class="form__body">
+          <div class="field">
+            <label for="f-name">Nombre y apellidos <span class="req">*</span></label>
+            <input id="f-name" name="name" type="text" placeholder="Ana García López" autocomplete="name" required>
+            <span class="field__err">Indícanos tu nombre y apellidos.</span>
+          </div>
+          <div class="form__row">
+            <div class="field">
+              <label for="f-company">Compañía <span class="req">*</span></label>
+              <input id="f-company" name="company" type="text" placeholder="Tu empresa" autocomplete="organization" required>
+              <span class="field__err">¿En qué compañía trabajas?</span>
+            </div>
+            <div class="field">
+              <label for="f-role">Cargo <span class="req">*</span></label>
+              <input id="f-role" name="role" type="text" placeholder="Director de Inmuebles" autocomplete="organization-title" required>
+              <span class="field__err">Indícanos tu cargo.</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-email">Email corporativo <span class="req">*</span></label>
+            <input id="f-email" name="email" type="email" placeholder="nombre@empresa.com" autocomplete="email" required>
+            <span class="field__err">Introduce un email corporativo válido.</span>
+          </div>
+          <div class="field">
+            <label for="f-notes">Notas <span class="opt">(opcional)</span></label>
+            <textarea id="f-notes" name="notes" placeholder="¿Alguna necesidad de accesibilidad, dieta o tema que te gustaría tratar?"></textarea>
+            <span class="field__err"></span>
+          </div>
+          <button type="submit" class="form__submit">Completar registro</button>
+          <p class="form__legal">Al registrarte aceptas la <a href="#">política de privacidad</a> de Savills. Usaremos tus datos únicamente para gestionar tu asistencia a este evento.</p>
+        </div>
+        <div class="form__success">
+          <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m20 6-11 11L4 12"/></svg></span>
+          <h3>¡Plaza reservada!</h3>
+          <p id="success-msg">Gracias, te hemos enviado la confirmación a tu email. Nos vemos el 25 de junio.</p>
+          <button type="button" class="calbtn" id="reset-form" style="border-radius:8px;">Registrar a otra persona</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER PANEL ============ -->
+  <footer class="footer panel">
+    <div class="footer__left">
+      <span class="footer__logo"><img src="assets/savills-logo-mono-white.png" alt="Savills"></span>
+      <span class="footer__copy">© 2026 Savills Spain. Todos los derechos reservados.</span>
+    </div>
+    <div class="footer__right">
+      <a class="footer__visit" href="https://www.savills.es" target="_blank" rel="noopener">Visita Savills.es</a>
+      <div class="footer__social">
+        <a class="social-btn" href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19 4.9 12 4.9 12 4.9s-7 0-8.9.5A3 3 0 0 0 1 7.5 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.5 31 31 0 0 0-.5-4.5ZM9.8 15.3V8.7l5.7 3.3-5.7 3.3Z"/></svg></a>
+        <a class="social-btn" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm6 0h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 5.9V21H17v-5.5c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9V9Z"/></svg></a>
+        <a class="social-btn" href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script src="image-slot.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
