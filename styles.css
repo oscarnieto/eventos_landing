@@ -33,7 +33,7 @@
   --serif:'Playfair Display',Georgia,serif;
 
   --frame:clamp(10px,1.2vw,16px);
-  --maxw:1280px;
+  --maxw:1440px;
   --pad:clamp(22px,4.4vw,60px);
   --tight:-0.04em;
 }
