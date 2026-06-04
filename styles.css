@@ -84,7 +84,7 @@ a{color:inherit;text-decoration:none;}
 .hero__bg{
   position:absolute;inset:-25% 0;
   background:url('assets/cover-bg.jpg') center/cover no-repeat;
-  will-change:transform;transition:transform .12s linear;z-index:0;
+  will-change:transform;z-index:0;
 }
 .hero__bg::after{content:"";position:absolute;inset:0;
   background:radial-gradient(120% 90% at 50% 35%,rgba(255,255,255,.04),transparent 60%),
@@ -236,7 +236,6 @@ a{color:inherit;text-decoration:none;}
   inset:-25% 0;
   background:url('assets/registro-bg.jpg') center/cover no-repeat;
   will-change:transform;
-  transition:transform .1s linear;
   z-index:0;
 }
 .registro__bg::after{

@@ -83,20 +83,37 @@
   window.addEventListener('beforeprint', function () { document.documentElement.classList.add('reveal-fallback'); });
 
   /* ---------- Parallax: hero + registro ---------- */
-  if (!window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
-    var parallaxItems = [
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    // En táctil/móvil el scroll va en el hilo del compositor y el JS en el
+    // principal: se desincronizan y el fondo "salta". Mejor dejarlo estático.
+    var coarse = window.matchMedia('(hover:none),(pointer:coarse)').matches;
+    var small  = window.matchMedia('(max-width:768px)').matches;
+    if (reduce || coarse || small) return;
+
+    var items = [
       { bg: document.querySelector('.hero__bg'),     section: document.getElementById('top'),       speed: 0.10 },
       { bg: document.querySelector('.registro__bg'), section: document.getElementById('registro'),  speed: 0.10 }
-    ];
+    ].filter(function (p) { return p.bg && p.section; });
+    if (!items.length) return;
+
+    var ticking = false;
+    var update = function () {
+      ticking = false;
+      for (var i = 0; i < items.length; i++) {
+        var p = items[i];
+        var top = p.section.getBoundingClientRect().top;
+        // translate3d → capa GPU; sin transición CSS, un frame por rAF = suave.
+        p.bg.style.transform = 'translate3d(0,' + (top * p.speed) + 'px,0)';
+      }
+    };
     var onScroll = function () {
-      parallaxItems.forEach(function (p) {
-        if (!p.bg) return;
-        p.bg.style.transform = 'translateY(' + (p.section.getBoundingClientRect().top * p.speed) + 'px)';
-      });
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  })();
 
   /* ---------- Botón "volver arriba" ---------- */
   var toTop = document.createElement('button');
