@@ -415,12 +415,26 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .to-top:active{transform:translateY(0) scale(1);}
 .to-top svg{width:22px;height:22px;}
 
+/* — Hero scroll hint arrow — */
+.hero__scroll-hint{
+  position:absolute;bottom:clamp(20px,3.5vw,32px);left:50%;
+  transform:translateX(-50%);z-index:2;
+  color:var(--yellow);opacity:.5;
+  animation:scroll-bounce 2.6s ease-in-out infinite;
+}
+.hero__scroll-hint svg{display:block;width:28px;height:28px;filter:drop-shadow(0 0 6px rgba(255,223,0,.35));}
+@keyframes scroll-bounce{
+  0%,100%{transform:translateX(-50%) translateY(0);}
+  55%{transform:translateX(-50%) translateY(8px);}
+}
+
 /* — Respeto a usuarios con movimiento reducido — */
 @media (prefers-reduced-motion:reduce){
   .oplogo__mark,.info::before,.info::after{animation:none;}
   .form__submit::after{transition:none;}
   .spk,.spk image-slot,.spk__cap,.stat::before{transition:none;}
   .to-top{transition:opacity .2s ease,visibility .2s;}
+  .hero__scroll-hint{animation:none;}
 }
 
 /* =====================================================================
