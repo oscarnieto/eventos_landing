@@ -97,15 +97,8 @@ a{color:inherit;text-decoration:none;}
              linear-gradient(180deg,rgba(0,0,0,.42),rgba(0,0,0,.58));pointer-events:none;}
 .hero__content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;}
 
-.oplogo{display:flex;align-items:center;gap:12px;margin-bottom:clamp(28px,5vw,48px);}
-.oplogo__default{display:flex;align-items:center;gap:12px;}
-.oplogo__img{max-height:72px;max-width:min(320px,70vw);width:auto;height:auto;display:block;}
-.oplogo__words{display:flex;flex-direction:column;align-items:flex-start;line-height:.86;letter-spacing:.04em;}
-.oplogo__words .l1{font-weight:600;font-size:1rem;color:#fff;}
-.oplogo__words .l2{font-weight:700;font-size:1.55rem;color:var(--yellow);}
-.oplogo__mark{position:relative;width:64px;height:40px;color:var(--yellow);}
-.oplogo__mark .skyline{width:100%;height:auto;}
-.oplogo__mark .virtual{position:absolute;right:-2px;bottom:-3px;width:46px;height:auto;color:#fff;opacity:.9;}
+.oplogo{margin-bottom:clamp(28px,5vw,48px);}
+.oplogo__default,.oplogo__img{max-height:72px;max-width:min(320px,70vw);width:auto;height:auto;display:block;}
 
 .hero__title{font-family:var(--font);font-weight:700;text-transform:uppercase;
   font-size:clamp(30px,4.6vw,56px);letter-spacing:.02em;line-height:1;margin:0;}
@@ -375,8 +368,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 
 /* — Hero: glow en el subtítulo amarillo + flotación del isotipo — */
 .hero__sub{text-shadow:0 2px 34px rgba(255,223,0,.28);}
-.oplogo__mark{animation:op-float 4.5s ease-in-out infinite;}
-@keyframes op-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
 
 /* — Profundidad extra en superficies glass — */
 .hero__meta,.highlights,.stat{box-shadow:0 10px 30px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.10);}
@@ -445,7 +436,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 
 /* — Respeto a usuarios con movimiento reducido — */
 @media (prefers-reduced-motion:reduce){
-  .oplogo__mark,.info::before,.info::after{animation:none;}
+  .info::before,.info::after{animation:none;}
   .form__submit::after{transition:none;}
   .spk,.spk image-slot,.spk__cap,.stat::before{transition:none;}
   .to-top{transition:opacity .2s ease,visibility .2s;}
@@ -493,7 +484,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   /* Hero: tipografía ajustada a pantallas estrechas */
   .hero__title{font-size:clamp(26px,9vw,34px);}
   .hero__sub{font-size:clamp(28px,11vw,40px);}
-  .oplogo__words .l2{font-size:1.35rem;}
 
   /* Countdown: que entre cómodo, unidades flexibles */
   .clock{gap:6px;width:100%;}

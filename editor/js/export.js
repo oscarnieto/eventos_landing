@@ -14,7 +14,8 @@ window.Exporter = (function () {
   var BASE_FILES = ['index.html', 'styles.css', 'app.js', 'image-slot.js'];
   var FIXED_ASSETS = [
     'assets/savills-logo.png',
-    'assets/savills-logo-mono-black.png'
+    'assets/savills-logo-mono-black.png',
+    'assets/office-pulse-logo.png'
   ];
   var FONTS = [
     'fonts/Montserrat-Light.ttf', 'fonts/Montserrat-Regular.ttf',
