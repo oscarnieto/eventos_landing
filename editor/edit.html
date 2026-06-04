@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editar evento · Editor de Landings</title>
+<link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+
+<div class="editor">
+
+  <!-- barra superior -->
+  <div class="editor__bar">
+    <div class="editor__bar-left">
+      <button class="btn btn--ghost btn--sm" id="back" title="Volver">←</button>
+      <input class="editor__name" id="project-name" value="Evento" aria-label="Nombre del proyecto">
+      <span class="save-state" id="save-state">Guardado</span>
+    </div>
+    <div class="editor__bar-right">
+      <button class="btn btn--sm" id="open-preview" title="Abrir en pestaña nueva">Ver landing</button>
+      <button class="btn btn--primary btn--sm" id="export">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Exportar ZIP
+      </button>
+    </div>
+  </div>
+
+  <div class="editor__body">
+    <!-- panel de edición -->
+    <aside class="panel-col" id="panel"></aside>
+
+    <!-- previsualización -->
+    <div class="preview-col">
+      <div class="preview-toolbar">
+        <button class="btn btn--sm active" id="view-desktop">🖥 Escritorio</button>
+        <button class="btn btn--sm" id="view-mobile">📱 Móvil</button>
+      </div>
+      <div class="preview-frame-wrap">
+        <iframe id="preview" title="Previsualización"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/db.js"></script>
+<script src="libs/jszip.min.js"></script>
+<script src="libs/sortable.min.js"></script>
+<script src="js/export.js"></script>
+<script src="js/editor.js"></script>
+</body>
+</html>

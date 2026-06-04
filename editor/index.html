@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acceso · Editor de Landings</title>
+<link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+<div class="login">
+  <form class="login__card" id="login-form">
+    <img class="login__logo" src="../assets/savills-logo.png" alt="Savills">
+    <h1 class="login__title">Editor de Landings</h1>
+    <p class="login__sub">Introduce la contraseña para continuar</p>
+
+    <div class="login__field">
+      <label for="pw">Contraseña</label>
+      <input class="input" type="password" id="pw" autocomplete="current-password" autofocus>
+    </div>
+    <p class="login__err" id="err"></p>
+    <button type="submit" class="btn btn--primary btn--block">Entrar</button>
+  </form>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  // si ya hay sesión, ir directo al dashboard
+  if (Auth.isLoggedIn()) location.href = 'dashboard.html';
+
+  var form = document.getElementById('login-form');
+  var err = document.getElementById('err');
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    err.textContent = '';
+    var pw = document.getElementById('pw').value;
+    var ok = await Auth.login(pw);
+    if (ok) location.href = 'dashboard.html';
+    else {
+      err.textContent = 'Contraseña incorrecta.';
+      document.getElementById('pw').select();
+    }
+  });
+</script>
+</body>
+</html>
