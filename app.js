@@ -98,6 +98,21 @@
     onScroll();
   }
 
+  /* ---------- Botón "volver arriba" ---------- */
+  var toTop = document.createElement('button');
+  toTop.className = 'to-top';
+  toTop.setAttribute('aria-label', 'Volver arriba');
+  toTop.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg>';
+  document.body.appendChild(toTop);
+  toTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  var toggleTop = function () {
+    toTop.classList.toggle('show', window.scrollY > 600);
+  };
+  window.addEventListener('scroll', toggleTop, { passive: true });
+  toggleTop();
+
   /* ---------- Add to calendar ---------- */
   function toUTC(dstr) {
     var d = new Date(dstr);
