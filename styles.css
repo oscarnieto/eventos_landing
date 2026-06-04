@@ -134,13 +134,38 @@ a{color:inherit;text-decoration:none;}
 .info__inner{max-width:1180px;margin-inline:auto;display:flex;flex-direction:column;
   gap:clamp(44px,6vw,78px);align-items:center;}
 
-.clock{display:flex;align-items:flex-start;justify-content:center;gap:0;}
-.clock__unit{display:flex;flex-direction:column;align-items:center;padding:0 clamp(14px,2.8vw,40px);position:relative;}
-.clock__unit + .clock__unit::before{content:"";position:absolute;left:0;top:6px;bottom:18px;width:1px;background:var(--grey);}
-.clock__num{font-family:var(--font);font-weight:700;font-size:clamp(40px,7vw,56px);
-  color:var(--ink);letter-spacing:var(--tight);line-height:1;font-variant-numeric:tabular-nums;}
-.clock__lbl{font-family:var(--font);font-weight:400;font-size:clamp(13px,1.4vw,18px);
-  color:var(--grey);letter-spacing:var(--tight);margin-top:10px;}
+.clock{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(10px,1.4vw,16px);width:100%;max-width:900px;
+}
+.clock__unit{
+  background:var(--ink);border-radius:16px;
+  padding:clamp(24px,3.4vw,48px) clamp(12px,1.6vw,20px) clamp(18px,2.4vw,30px);
+  display:flex;flex-direction:column;align-items:center;
+  gap:clamp(8px,1vw,12px);position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,.06);
+}
+.clock__unit+.clock__unit::before{display:none;}
+.clock__unit::after{
+  content:"";position:absolute;top:0;left:0;right:0;
+  height:3px;background:var(--yellow);
+}
+.clock__num{
+  font-family:var(--font);font-weight:800;
+  font-size:clamp(52px,8vw,92px);
+  color:#fff;letter-spacing:-.04em;line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.clock__lbl{
+  font-size:.65rem;font-weight:700;
+  color:var(--yellow);letter-spacing:.18em;text-transform:uppercase;
+}
+@keyframes num-tick{
+  0%{opacity:.3;transform:translateY(-10px);}
+  100%{opacity:1;transform:translateY(0);}
+}
+.clock__num.ticked{animation:num-tick .24s cubic-bezier(.2,.8,.2,1);}
+@media(max-width:520px){.clock{grid-template-columns:repeat(2,1fr);}}
 
 .about{display:flex;flex-direction:column;align-items:center;gap:22px;max-width:980px;}
 .about__desc{font-family:var(--inter);font-weight:400;font-size:clamp(17px,2vw,26px);

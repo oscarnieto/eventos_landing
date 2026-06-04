@@ -41,13 +41,21 @@
       secs: clock.querySelector('[data-unit="secs"]')
     };
     var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var setVal = function (el, n) {
+      var v = pad(n);
+      if (el.textContent === v) return;
+      el.textContent = v;
+      el.classList.remove('ticked');
+      void el.offsetWidth;
+      el.classList.add('ticked');
+    };
     var tick = function () {
       var diff = Math.max(0, target - Date.now());
       var s = Math.floor(diff / 1000);
-      u.days.textContent = pad(Math.floor(s / 86400));
-      u.hours.textContent = pad(Math.floor((s % 86400) / 3600));
-      u.mins.textContent = pad(Math.floor((s % 3600) / 60));
-      u.secs.textContent = pad(s % 60);
+      setVal(u.days,  Math.floor(s / 86400));
+      setVal(u.hours, Math.floor((s % 86400) / 3600));
+      setVal(u.mins,  Math.floor((s % 3600) / 60));
+      setVal(u.secs,  s % 60);
     };
     tick();
     setInterval(tick, 1000);
