@@ -294,8 +294,8 @@ a{color:inherit;text-decoration:none;}
 
 .footer{background:var(--yellow);color:var(--ink);padding:clamp(28px,3.4vw,40px) var(--pad);
   display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
-.footer__logo{height:30px;display:grid;place-items:center;flex:none;}
-.footer__logo img{height:100%;width:auto;object-fit:contain;}
+.footer__logo{width:54px;height:54px;display:grid;place-items:center;flex:none;}
+.footer__logo img{width:100%;height:100%;object-fit:contain;}
 .footer__left{display:flex;align-items:center;gap:18px;}
 .footer__copy{font-family:var(--font);font-weight:400;font-size:.86rem;color:var(--ink);}
 .footer__right{display:flex;align-items:center;gap:clamp(20px,3vw,40px);}
