@@ -264,11 +264,15 @@
       '</div></div>';
   }
   function logoUploader(path, label) {
+    var DEFAULT_LOGO = '../assets/office-pulse-logo.png';
     var src = resolveSrc(get(CONFIG, path));
-    var clearBtn = src ? '<button class="btn btn--sm btn--ghost" data-clear="' + path + '" style="margin-top:8px">Quitar logo (usar el de la plantilla)</button>' : '';
-    return '<div class="field-grp"><label>' + label + ' <span class="hint">vacío = logo de la plantilla</span></label>' +
+    var hasCustom = !!src;
+    var previewSrc = hasCustom ? src : DEFAULT_LOGO;
+    var hint = hasCustom ? 'logo personalizado' : 'logo por defecto';
+    var clearBtn = hasCustom ? '<button class="btn btn--sm btn--ghost" data-clear="' + path + '" style="margin-top:8px">Quitar logo (restaurar el de la plantilla)</button>' : '';
+    return '<div class="field-grp"><label>' + label + ' <span class="hint">' + hint + '</span></label>' +
       '<div class="uploader uploader--logo" data-upload="' + path + '">' +
-        '<img class="uploader__preview uploader__preview--logo' + (src ? ' show' : '') + '" src="' + escHtml(src) + '">' +
+        '<img class="uploader__preview uploader__preview--logo show" src="' + escHtml(previewSrc) + '" data-default-logo="' + DEFAULT_LOGO + '">' +
         '<div class="uploader__txt"><strong>Haz clic</strong> o arrastra el logo aquí</div>' +
         '<input type="file" accept="image/*">' +
       '</div>' + clearBtn + '</div>';
@@ -371,7 +375,14 @@
       var cpath = clear.getAttribute('data-clear');
       setPath(CONFIG, cpath, '');
       var up = panel.querySelector('[data-upload="' + cpath + '"]');
-      if (up) { var img = up.querySelector('.uploader__preview'); img.classList.remove('show'); img.removeAttribute('src'); }
+      if (up) {
+        var img = up.querySelector('.uploader__preview');
+        var defaultSrc = img && img.getAttribute('data-default-logo');
+        if (defaultSrc) { img.src = defaultSrc; }
+        else { img.classList.remove('show'); img.removeAttribute('src'); }
+        var lbl = up.parentNode.querySelector('label .hint');
+        if (lbl) lbl.textContent = 'logo por defecto';
+      }
       clear.remove();
       change(); return;
     }
@@ -393,11 +404,15 @@
         setPath(CONFIG, path, dataUrl);
         var img = up.querySelector('.uploader__preview');
         img.src = dataUrl; img.classList.add('show');
-        if (up.classList.contains('uploader--logo') && !up.parentNode.querySelector('[data-clear]')) {
-          var b = document.createElement('button');
-          b.className = 'btn btn--sm btn--ghost'; b.setAttribute('data-clear', path);
-          b.style.marginTop = '8px'; b.textContent = 'Quitar logo (usar el de la plantilla)';
-          up.parentNode.appendChild(b);
+        if (up.classList.contains('uploader--logo')) {
+          var lbl2 = up.parentNode.querySelector('label .hint');
+          if (lbl2) lbl2.textContent = 'logo personalizado';
+          if (!up.parentNode.querySelector('[data-clear]')) {
+            var b = document.createElement('button');
+            b.className = 'btn btn--sm btn--ghost'; b.setAttribute('data-clear', path);
+            b.style.marginTop = '8px'; b.textContent = 'Quitar logo (restaurar el de la plantilla)';
+            up.parentNode.appendChild(b);
+          }
         }
         change();
       });
