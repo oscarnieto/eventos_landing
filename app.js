@@ -73,10 +73,10 @@
     var vh = window.innerHeight || 800;
     reveals.forEach(function (el) {
       var r = el.getBoundingClientRect();
-      if (r.top < vh * 0.94 && r.bottom > 0) reveal(el);
+      // Solo revela lo que ya está en pantalla al cargar; el resto al hacer scroll.
+      if (r.top < vh * 0.9 && r.bottom > 0) reveal(el);
       else io.observe(el);
     });
-    setTimeout(function () { document.documentElement.classList.add('reveal-fallback'); }, 1500);
   } else {
     document.documentElement.classList.add('reveal-fallback');
   }
