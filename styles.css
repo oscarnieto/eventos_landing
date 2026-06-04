@@ -70,9 +70,11 @@ a{color:inherit;text-decoration:none;}
 .nav__links{display:flex;gap:clamp(18px,2.4vw,34px);}
 .nav__links a{color:rgba(255,255,255,.86);font-weight:500;font-size:.9rem;letter-spacing:.01em;transition:color .15s;}
 .nav__links a:hover{color:#fff;}
-.nav__cta{background:var(--yellow);color:var(--ink);font-weight:500;font-size:1rem;
-  padding:.55em 1.5em;border-radius:5px;border:none;transition:background .15s,transform .12s;}
-.nav__cta:hover{background:var(--yellow-press);}
+.nav__cta{background:rgba(255,255,255,.10);color:#fff;font-weight:500;font-size:1rem;
+  padding:.55em 1.5em;border-radius:5px;border:1px solid rgba(255,255,255,.45);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  transition:background .18s,border-color .18s,transform .12s;}
+.nav__cta:hover{background:rgba(255,255,255,.20);border-color:rgba(255,255,255,.75);}
 .nav__cta:active{transform:translateY(1px);}
 @media (max-width:760px){.nav__links{display:none;}}
 
@@ -293,8 +295,8 @@ a{color:inherit;text-decoration:none;}
 
 .footer{background:var(--yellow);color:var(--ink);padding:clamp(28px,3.4vw,40px) var(--pad);
   display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;}
-.footer__logo{width:50px;height:50px;background:var(--ink);display:grid;place-items:center;flex:none;}
-.footer__logo img{width:38px;}
+.footer__logo{height:46px;display:grid;place-items:center;flex:none;}
+.footer__logo img{height:100%;width:auto;object-fit:contain;}
 .footer__left{display:flex;align-items:center;gap:18px;}
 .footer__copy{font-family:var(--font);font-weight:400;font-size:.86rem;color:var(--ink);}
 .footer__right{display:flex;align-items:center;gap:clamp(20px,3vw,40px);}
@@ -308,14 +310,14 @@ a{color:inherit;text-decoration:none;}
 .social-btn:hover{background:var(--ink);color:var(--yellow);transform:translateY(-2px);}
 @media (max-width:680px){.footer{flex-direction:column;align-items:flex-start;gap:22px;}}
 
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s cubic-bezier(.2,.7,.2,1),transform .65s cubic-bezier(.2,.7,.2,1);}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 1.05s cubic-bezier(.16,.7,.2,1),transform 1.05s cubic-bezier(.16,.7,.2,1);}
 .reveal.in{opacity:1;transform:none;}
-.reveal.d1{transition-delay:.08s;}
-.reveal.d2{transition-delay:.16s;}
-.reveal.d3{transition-delay:.24s;}
+.reveal.d1{transition-delay:.12s;}
+.reveal.d2{transition-delay:.24s;}
+.reveal.d3{transition-delay:.36s;}
 html.reveal-fallback .reveal{opacity:1 !important;transform:none !important;transition:none !important;}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
-.reveal.d4{transition-delay:.32s;}
+.reveal.d4{transition-delay:.48s;}
 
 /* =====================================================================
    ENHANCEMENTS · capa de pulido visual (degradados · glows · microinteracciones)
@@ -335,27 +337,25 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   outline:2px solid var(--yellow);outline-offset:3px;border-radius:4px;
 }
 
-/* — Botones amarillos premium: degradado + lift + glow — */
-.nav__cta,.calbtn,.form__submit,.form__success .calbtn{
-  background-image:linear-gradient(135deg,#FFE85C 0%,#FFDF00 52%,#F4D200 100%);
+/* — Botones amarillos: lift + glow (color plano, sin degradado) — */
+.calbtn,.form__submit{
   box-shadow:0 2px 10px rgba(0,0,0,.10);
-  transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease,filter .2s ease,background-color .15s ease;
+  transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease,background-color .15s ease;
 }
-.nav__cta:hover,.calbtn:hover,.form__submit:hover{
+.calbtn:hover,.form__submit:hover{
   transform:translateY(-2px);
   box-shadow:0 12px 28px rgba(255,223,0,.40);
-  filter:saturate(1.05);
 }
-.nav__cta:active,.calbtn:active,.form__submit:active{transform:translateY(0);box-shadow:0 4px 14px rgba(255,223,0,.30);}
+.calbtn:active,.form__submit:active{transform:translateY(0);box-shadow:0 4px 14px rgba(255,223,0,.30);}
 
-/* — Shine sweep en los CTAs principales — */
-.nav__cta,.form__submit{position:relative;overflow:hidden;}
-.nav__cta::after,.form__submit::after{
+/* — Shine sweep en el CTA del formulario — */
+.form__submit{position:relative;overflow:hidden;}
+.form__submit::after{
   content:"";position:absolute;top:0;left:0;height:100%;width:55%;pointer-events:none;
   background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);
   transform:translateX(-180%) skewX(-18deg);transition:transform .7s ease;
 }
-.nav__cta:hover::after,.form__submit:hover::after{transform:translateX(280%) skewX(-18deg);}
+.form__submit:hover::after{transform:translateX(280%) skewX(-18deg);}
 
 /* — Logo nav: leve realce al pasar — */
 .nav__logo{transition:transform .3s cubic-bezier(.2,.8,.2,1);}
@@ -395,11 +395,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 /* — Footer: redes con relieve + enlace con subrayado animado — */
 .social-btn{transition:background .2s,color .2s,transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .2s;}
 .social-btn:hover{box-shadow:0 10px 20px rgba(0,0,0,.22);}
-.footer__visit{border-bottom:none;position:relative;}
+.footer__visit{border-bottom:none;position:relative;padding-bottom:3px;}
 .footer__visit::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;background:var(--ink);
-  transform:scaleX(1);transform-origin:left;transition:transform .35s cubic-bezier(.2,.8,.2,1);}
+  transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.2,.8,.2,1);}
 .footer__visit:hover{opacity:1;}
-.footer__visit:hover::after{transform:scaleX(0);transform-origin:right;}
+.footer__visit:hover::after{transform:scaleX(1);transform-origin:left;}
 
 /* — Botón flotante "volver arriba" — */
 .to-top{
@@ -419,7 +419,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 /* — Respeto a usuarios con movimiento reducido — */
 @media (prefers-reduced-motion:reduce){
   .oplogo__mark,.info::before,.info::after{animation:none;}
-  .nav__cta::after,.form__submit::after{transition:none;}
+  .form__submit::after{transition:none;}
   .spk,.spk image-slot,.spk__cap,.stat::before{transition:none;}
   .to-top{transition:opacity .2s ease,visibility .2s;}
 }
