@@ -14,19 +14,38 @@ window.EVENT_CONFIG = {
     lang: 'es'
   },
 
+  /* Colores configurables (se aplican como variables CSS) */
+  theme: {
+    accent:   '#FFDF00',   // color de acento (subtítulo, etiquetas, botones…)
+    heroText: '#ffffff',   // color de los textos del hero
+    infoBg:   '#0c1c46',   // fondo de la sección de información
+    infoText: '#ffffff'    // color de los textos de la sección de información
+  },
+
+  /* Visibilidad de secciones (false = oculta) */
+  sections: {
+    countdown:  true,
+    highlights: true,
+    calendar:   true,
+    agenda:     true,
+    speakers:   true,
+    registro:   true
+  },
+
   hero: {
-    eyebrowLine1: 'OFFICE',
-    eyebrowLine2: 'PULSE',
+    eventLogo: '',          // imagen de logo del evento ('' = logo por defecto)
     title: 'Oficinas',
     subtitle: 'Impulso y oportunidad',
     backgroundImage: 'assets/cover-bg.jpg',
-    navCta: 'Registro',
-    meta: [
-      { value: '25 junio 2026',         label: 'Fecha' },
-      { value: '09:30 – 14:00h',        label: 'Hora'  },
-      { value: 'Madrid · Castellana 81', label: 'Lugar' }
-    ]
+    navCta: 'Registro'
   },
+
+  /* Highlights: se muestran tanto en el hero como en la sección info */
+  highlights: [
+    { value: '25 junio 2026',          label: 'Fecha' },
+    { value: '09:30 – 14:00h',         label: 'Hora'  },
+    { value: 'Castellana 81, Madrid',  label: 'Lugar' }
+  ],
 
   event: {
     /* Usados por el countdown y por los botones "Añadir al calendario" */
@@ -38,12 +57,6 @@ window.EVENT_CONFIG = {
     calendarTitle: 'OFICINAS · Impulso y oportunidad — Savills',
     calendarDescription: 'Jornada Savills Research sobre el mercado de oficinas: ocupación, rentas prime, flexibilidad y sostenibilidad. Recepción desde las 09:00h.'
   },
-
-  highlights: [
-    { value: '25 jun 2026',          label: 'Fecha' },
-    { value: '09:30 – 14:00h',       label: 'Hora'  },
-    { value: 'Castellana 81, Madrid', label: 'Lugar' }
-  ],
 
   agenda: [
     { time: '09:30h', title: 'Recepción y café de bienvenida' },
@@ -57,6 +70,10 @@ window.EVENT_CONFIG = {
     { name: 'Phillip Ekstrom', role: 'Head of Technology',     company: '', photo: 'assets/speaker-2.jpg' },
     { name: 'Abram Culhane',  role: 'Head of Technology',     company: '', photo: 'assets/speaker-3.jpg' }
   ],
+
+  registro: {
+    backgroundImage: 'assets/registro-bg.jpg'
+  },
 
   form: {
     title: 'Formulario de registro',

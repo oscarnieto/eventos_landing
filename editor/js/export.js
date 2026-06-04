@@ -14,8 +14,7 @@ window.Exporter = (function () {
   var BASE_FILES = ['index.html', 'styles.css', 'app.js', 'image-slot.js'];
   var FIXED_ASSETS = [
     'assets/savills-logo.png',
-    'assets/savills-logo-mono-black.png',
-    'assets/registro-bg.jpg'
+    'assets/savills-logo-mono-black.png'
   ];
   var FONTS = [
     'fonts/Montserrat-Light.ttf', 'fonts/Montserrat-Regular.ttf',
@@ -80,7 +79,13 @@ window.Exporter = (function () {
       var toCopy = new Set();
 
       /* materializar / registrar imágenes del config */
-      if (cfg.hero) cfg.hero.backgroundImage = processImage(zip, cfg.hero.backgroundImage, 'hero', toCopy);
+      if (cfg.hero) {
+        cfg.hero.backgroundImage = processImage(zip, cfg.hero.backgroundImage, 'hero', toCopy);
+        cfg.hero.eventLogo = processImage(zip, cfg.hero.eventLogo, 'event-logo', toCopy);
+      }
+      if (cfg.registro) {
+        cfg.registro.backgroundImage = processImage(zip, cfg.registro.backgroundImage, 'registro', toCopy);
+      }
       if (Array.isArray(cfg.speakers)) {
         cfg.speakers.forEach(function (s, i) {
           s.photo = processImage(zip, s.photo, 'speaker-' + (i + 1), toCopy);

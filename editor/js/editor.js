@@ -72,16 +72,6 @@
      DEFINICIÓN DE LISTAS DINÁMICAS
      ==================================================================== */
   var LISTS = {
-    'hero.meta': {
-      sortable: true,
-      blank: function () { return { value: '', label: '' }; },
-      item: function (it, i) {
-        return labelRow('Dato ' + (i + 1)) +
-          '<div class="row-2">' +
-          itemInput('hero.meta', i, 'value', 'Valor', it.value) +
-          itemInput('hero.meta', i, 'label', 'Etiqueta', it.label) + '</div>';
-      }
-    },
     'highlights': {
       sortable: true,
       blank: function () { return { value: '', label: '' }; },
@@ -180,13 +170,29 @@
   function buildPanel() {
     var panel = qs('#panel');
     panel.innerHTML =
+      section('Estilo y colores', icoPalette(),
+        colorField('theme.accent', 'Color de acento', 'Subtítulo, etiquetas, botones, detalles') +
+        colorField('theme.heroText', 'Color de texto de la cabecera') +
+        '<hr style="border:none;border-top:1px solid var(--line);margin:16px 0">' +
+        colorField('theme.infoBg', 'Color de fondo · Información') +
+        colorField('theme.infoText', 'Color de texto · Información'), true) +
+
+      section('Secciones visibles', icoEye(),
+        '<p class="field-grp" style="color:var(--muted);font-size:.82rem;margin-bottom:6px">Desactiva una sección para ocultarla de la página.</p>' +
+        toggleRow('countdown', 'Cuenta atrás') +
+        toggleRow('highlights', 'Highlights') +
+        toggleRow('calendar', 'Añadir al calendario') +
+        toggleRow('agenda', 'Agenda') +
+        toggleRow('speakers', 'Ponentes') +
+        toggleRow('registro', 'Formulario de registro'), false) +
+
       section('Cabecera', icoImage(),
-        uploader('hero.backgroundImage', 'Imagen principal') +
-        '<div class="row-2">' + field('hero.eyebrowLine1', 'Texto superior 1') + field('hero.eyebrowLine2', 'Texto superior 2') + '</div>' +
+        logoUploader('hero.eventLogo', 'Logo del evento') +
+        uploader('hero.backgroundImage', 'Imagen de fondo') +
         field('hero.title', 'Título principal') +
         field('hero.subtitle', 'Subtítulo') +
         field('hero.navCta', 'Texto del botón (menú)') +
-        listBlock('hero.meta', 'Datos del hero', 'Añadir dato'), true) +
+        listBlock('highlights', 'Highlights (se muestran en cabecera e información)', 'Añadir highlight'), false) +
 
       section('Información del evento', icoInfo(),
         field('event.name', 'Nombre / título de sección') +
@@ -195,13 +201,8 @@
           dateField('event.start', 'Inicio') +
           dateField('event.end', 'Fin') + '</div>' +
         field('event.location', 'Lugar (para el calendario)') +
-        textarea('event.calendarDescription', 'Descripción para el calendario'), false) +
-
-      section('Countdown', icoClock(),
-        '<p class="field-grp" style="color:var(--muted);font-size:.85rem">El contador se sincroniza automáticamente con la fecha y hora de <strong>Inicio</strong> definidas en “Información del evento”.</p>', false) +
-
-      section('Highlights', icoStar(),
-        listBlock('highlights', 'Highlights', 'Añadir highlight'), false) +
+        textarea('event.calendarDescription', 'Descripción para el calendario') +
+        '<p class="field-grp" style="color:var(--muted);font-size:.82rem">La cuenta atrás se sincroniza automáticamente con la fecha de <strong>Inicio</strong>.</p>', false) +
 
       section('Agenda', icoList(),
         listBlock('agenda', 'Puntos de la agenda', 'Añadir punto'), false) +
@@ -210,6 +211,7 @@
         listBlock('speakers', 'Ponentes', 'Añadir ponente'), false) +
 
       section('Formulario de registro', icoForm(),
+        uploader('registro.backgroundImage', 'Imagen de fondo del formulario') +
         field('form.title', 'Título del formulario') +
         field('form.submitLabel', 'Texto del botón de envío') +
         textarea('form.legal', 'Texto legal (admite HTML)') +
@@ -249,15 +251,40 @@
     return '<div class="field-grp"><label>' + label + '</label>' +
       '<input class="input" type="datetime-local" data-path="' + path + '" data-date="1" value="' + escHtml(toInput(get(CONFIG, path))) + '"></div>';
   }
+  function resolveSrc(val) {
+    return val ? (/^(data:|https?:)/.test(val) ? val : '../' + val.replace(/^\.?\//, '')) : '';
+  }
   function uploader(path, label) {
-    var val = get(CONFIG, path);
-    var src = val ? (/^(data:|https?:)/.test(val) ? val : '../' + val.replace(/^\.?\//, '')) : '';
+    var src = resolveSrc(get(CONFIG, path));
     return '<div class="field-grp"><label>' + label + '</label>' +
       '<div class="uploader" data-upload="' + path + '">' +
         '<img class="uploader__preview' + (src ? ' show' : '') + '" src="' + escHtml(src) + '">' +
         '<div class="uploader__txt"><strong>Haz clic</strong> o arrastra una imagen aquí</div>' +
         '<input type="file" accept="image/*">' +
       '</div></div>';
+  }
+  function logoUploader(path, label) {
+    var src = resolveSrc(get(CONFIG, path));
+    var clearBtn = src ? '<button class="btn btn--sm btn--ghost" data-clear="' + path + '" style="margin-top:8px">Quitar logo (usar el de la plantilla)</button>' : '';
+    return '<div class="field-grp"><label>' + label + ' <span class="hint">vacío = logo de la plantilla</span></label>' +
+      '<div class="uploader uploader--logo" data-upload="' + path + '">' +
+        '<img class="uploader__preview uploader__preview--logo' + (src ? ' show' : '') + '" src="' + escHtml(src) + '">' +
+        '<div class="uploader__txt"><strong>Haz clic</strong> o arrastra el logo aquí</div>' +
+        '<input type="file" accept="image/*">' +
+      '</div>' + clearBtn + '</div>';
+  }
+  function colorField(path, label, hint) {
+    var v = get(CONFIG, path) || '#000000';
+    return '<div class="field-grp"><label>' + label + (hint ? ' <span class="hint">' + hint + '</span>' : '') + '</label>' +
+      '<div class="color-row">' +
+        '<input type="color" class="color-swatch" data-path="' + path + '" data-color="1" value="' + escHtml(v) + '">' +
+        '<input class="input color-hex" data-path="' + path + '" data-color-hex="1" value="' + escHtml(v) + '">' +
+      '</div></div>';
+  }
+  function toggleRow(name, label) {
+    var on = !(CONFIG.sections && CONFIG.sections[name] === false);
+    return '<label class="toggle-row"><span>' + label + '</span>' +
+      '<input type="checkbox" class="switch" data-section-toggle="' + name + '"' + (on ? ' checked' : '') + '></label>';
   }
   function listBlock(name, label, addLabel) {
     return '<div class="field-grp"><label>' + label + '</label>' +
@@ -277,14 +304,26 @@
       var val = el.value;
       if (el.hasAttribute('data-date')) val = fromInput(val);
       setPath(CONFIG, el.getAttribute('data-path'), val);
+      if (el.hasAttribute('data-color') || el.hasAttribute('data-color-hex')) syncColorPair(el);
       change();
     } else if (el.hasAttribute('data-list')) {
       updateListField(el); change();
     }
   });
+  function syncColorPair(el) {
+    var row = el.closest('.color-row'); if (!row) return;
+    var v = el.value;
+    row.querySelectorAll('[data-path]').forEach(function (inp) {
+      if (inp !== el && /^#[0-9a-fA-F]{6}$/.test(v)) inp.value = v;
+    });
+  }
   panel.addEventListener('change', function (e) {
     var el = e.target;
-    if (el.hasAttribute('data-list')) {
+    if (el.hasAttribute('data-section-toggle')) {
+      if (!CONFIG.sections) CONFIG.sections = {};
+      CONFIG.sections[el.getAttribute('data-section-toggle')] = el.checked;
+      change();
+    } else if (el.hasAttribute('data-list')) {
       updateListField(el);
       // si cambió el tipo de un campo de formulario, re-render para mostrar/ocultar opciones
       if (el.getAttribute('data-list') === 'form.fields' && el.getAttribute('data-key') === 'type') renderList('form.fields');
@@ -326,6 +365,16 @@
     // foto de ponente
     var photo = e.target.closest('[data-photo-idx]');
     if (photo) { pickSpeakerPhoto(+photo.getAttribute('data-photo-idx')); return; }
+    // quitar logo del evento
+    var clear = e.target.closest('[data-clear]');
+    if (clear) {
+      var cpath = clear.getAttribute('data-clear');
+      setPath(CONFIG, cpath, '');
+      var up = panel.querySelector('[data-upload="' + cpath + '"]');
+      if (up) { var img = up.querySelector('.uploader__preview'); img.classList.remove('show'); img.removeAttribute('src'); }
+      clear.remove();
+      change(); return;
+    }
   });
 
   /* ---------- uploaders de imagen ---------- */
@@ -344,6 +393,12 @@
         setPath(CONFIG, path, dataUrl);
         var img = up.querySelector('.uploader__preview');
         img.src = dataUrl; img.classList.add('show');
+        if (up.classList.contains('uploader--logo') && !up.parentNode.querySelector('[data-clear]')) {
+          var b = document.createElement('button');
+          b.className = 'btn btn--sm btn--ghost'; b.setAttribute('data-clear', path);
+          b.style.marginTop = '8px'; b.textContent = 'Quitar logo (usar el de la plantilla)';
+          up.parentNode.appendChild(b);
+        }
         change();
       });
     }
@@ -414,4 +469,6 @@
   function icoUsers() { return ic('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/>'); }
   function icoForm() { return ic('<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/>'); }
   function icoFooter() { return ic('<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15h18"/>'); }
+  function icoPalette() { return ic('<circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20 2.5 2.5 0 0 0 2-4 2.5 2.5 0 0 1 2-4h2a4 4 0 0 0 4-4 10 10 0 0 0-12-8z"/>'); }
+  function icoEye() { return ic('<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>'); }
 })();
