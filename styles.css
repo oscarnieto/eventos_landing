@@ -422,3 +422,60 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   .spk,.spk image-slot,.spk__cap,.stat::before{transition:none;}
   .to-top{transition:opacity .2s ease,visibility .2s;}
 }
+
+/* =====================================================================
+   MOBILE REVIEW · ajustes responsive (≤860 / ≤600 / ≤420)
+   ===================================================================== */
+@media (max-width:860px){
+  /* Nav más compacta + menos espacio superior del hero */
+  .hero{padding-top:clamp(88px,16vw,110px);}
+  .nav__logo{width:44px;height:44px;}
+
+  /* Calendario: botones apilados a ancho cómodo (mejor tap target) */
+  .calbtns{width:100%;max-width:380px;flex-direction:column;}
+  .calbtn{width:100%;justify-content:center;padding:.95em 1.2em;}
+
+  /* Footer: el bloque derecho fluye en vertical sin apretarse */
+  .footer__right{flex-direction:column;align-items:flex-start;gap:16px;}
+  .footer__visit{font-size:clamp(18px,5vw,22px);}
+}
+
+@media (max-width:600px){
+  /* HERO highlights: uno por fila, más pequeños y sin líneas separadoras */
+  .hero__meta{
+    flex-direction:column;align-items:stretch;
+    width:min(300px,100%);
+    margin-top:clamp(24px,8vw,34px);
+  }
+  .hero__meta div{padding:13px 18px;gap:2px;}
+  .hero__meta div+div::before{display:none;}              /* fuera separadores verticales */
+  .hero__meta div+div{box-shadow:inset 0 1px 0 rgba(255,255,255,.10);} /* hairline horizontal sutil */
+  .hero__meta dt{font-size:1rem;}
+  .hero__meta dd{font-size:.56rem;letter-spacing:.14em;}
+
+  /* Títulos de sección algo menores */
+  .sec-title{font-size:clamp(24px,7vw,32px);}
+
+  /* Form: padding interno más contenido */
+  .form{padding:clamp(22px,6vw,32px);}
+}
+
+@media (max-width:420px){
+  /* Hero: tipografía ajustada a pantallas estrechas */
+  .hero__title{font-size:clamp(26px,9vw,34px);}
+  .hero__sub{font-size:clamp(28px,11vw,40px);}
+  .oplogo__words .l2{font-size:1.35rem;}
+
+  /* Countdown: que entre cómodo, unidades flexibles */
+  .clock{gap:6px;width:100%;}
+  .clock__unit{min-width:0;flex:1;}
+  .clock__num{font-size:clamp(28px,11vw,38px);}
+  .clock__lbl{font-size:.52rem;letter-spacing:.1em;}
+  .clock__unit+.clock__unit::before{font-size:22px;left:-3px;}
+
+  /* About: lectura cómoda */
+  .about__desc{font-size:clamp(15px,4.6vw,18px);}
+
+  /* Footer: copy y logo proporcionados */
+  .footer__logo{width:48px;height:48px;}
+}
