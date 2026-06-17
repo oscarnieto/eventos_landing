@@ -39,7 +39,7 @@
     REC = rec; CONFIG = rec.config;
     qs('#project-name').value = rec.projectName || 'Evento';
     buildPanel();
-    iframe.src = '../index.html?preview=1';
+    iframe.src = '../index.html?preview=1&_=' + Date.now();
   });
 
   /* ---------- preview ---------- */
@@ -496,7 +496,7 @@
     this.classList.add('active'); qs('#view-desktop').classList.remove('active');
   });
   qs('#open-preview').addEventListener('click', function () {
-    window.open('../index.html?preview=1', '_blank');
+    window.open('../index.html?preview=1&_=' + Date.now(), '_blank');
     setTimeout(pushPreview, 400);
   });
   qs('#export').addEventListener('click', function () {
