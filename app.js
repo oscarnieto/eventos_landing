@@ -63,6 +63,7 @@
 
     applyTheme(cfg.theme);
     applySections(cfg.sections);
+    applySectionOrder(cfg.sectionOrder);
     renderHighlights(cfg.highlights);
     if (cfg.speakers) renderSpeakers(cfg.speakers);
     if (cfg.form && cfg.form.fields) { renderFields(cfg.form.fields); bindFormInputs(); }
@@ -129,6 +130,27 @@
     if (!sec) return;
     document.querySelectorAll('[data-section]').forEach(function (el) {
       el.style.display = (sec[el.getAttribute('data-section')] === false) ? 'none' : '';
+    });
+  }
+
+  /* reordena las secciones de la página según cfg.sectionOrder.
+     La cabecera (hero) queda siempre primera y el pie siempre último;
+     el resto se coloca, en orden, justo antes del pie. */
+  function applySectionOrder(order) {
+    if (!Array.isArray(order) || !order.length) return;
+    var page = document.querySelector('.page');
+    if (!page) return;
+    var footer = page.querySelector('.footer');
+    var seen = {};
+    // primero, las secciones listadas en el orden indicado…
+    order.forEach(function (key) {
+      var el = page.querySelector('section[data-section="' + key + '"]');
+      if (el && !seen[key]) { page.insertBefore(el, footer); seen[key] = true; }
+    });
+    // …y al final, cualquier sección no incluida en el orden (conserva su secuencia)
+    [].slice.call(page.querySelectorAll('section[data-section]')).forEach(function (el) {
+      var key = el.getAttribute('data-section');
+      if (!seen[key]) { page.insertBefore(el, footer); seen[key] = true; }
     });
   }
 

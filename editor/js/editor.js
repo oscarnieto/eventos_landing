@@ -169,6 +169,8 @@
      ==================================================================== */
   function buildPanel() {
     var panel = qs('#panel');
+    if (!CONFIG.sections) CONFIG.sections = {};
+    if (!Array.isArray(CONFIG.sectionOrder)) CONFIG.sectionOrder = sectionOrderList();
     panel.innerHTML =
       section('Estilo y colores', icoPalette(),
         colorField('theme.accent', 'Color de acento', 'Subtítulo, etiquetas, botones, detalles') +
@@ -177,14 +179,7 @@
         colorField('theme.infoBg', 'Color de fondo · Información') +
         colorField('theme.infoText', 'Color de texto · Información'), true) +
 
-      section('Secciones visibles', icoEye(),
-        '<p class="field-grp" style="color:var(--muted);font-size:.82rem;margin-bottom:6px">Desactiva una sección para ocultarla de la página.</p>' +
-        toggleRow('countdown', 'Cuenta atrás') +
-        toggleRow('highlights', 'Highlights') +
-        toggleRow('calendar', 'Añadir al calendario') +
-        toggleRow('agenda', 'Agenda') +
-        toggleRow('speakers', 'Ponentes') +
-        toggleRow('registro', 'Formulario de registro'), false) +
+      section('Secciones y orden', icoEye(), sectionsBlock(), false) +
 
       section('Cabecera', icoImage(),
         logoUploader('hero.eventLogo', 'Logo del evento') +
@@ -225,6 +220,7 @@
 
     // render de las listas
     Object.keys(LISTS).forEach(renderList);
+    initSectionSortable();
 
     // acordeón
     panel.querySelectorAll('.section__head').forEach(function (h) {
@@ -285,10 +281,47 @@
         '<input class="input color-hex" data-path="' + path + '" data-color-hex="1" value="' + escHtml(v) + '">' +
       '</div></div>';
   }
-  function toggleRow(name, label) {
-    var on = !(CONFIG.sections && CONFIG.sections[name] === false);
-    return '<label class="toggle-row"><span>' + label + '</span>' +
-      '<input type="checkbox" class="switch" data-section-toggle="' + name + '"' + (on ? ' checked' : '') + '></label>';
+  /* --- secciones reordenables de la landing --- */
+  var SECTION_LABELS = {
+    registro:   'Formulario de registro',
+    countdown:  'Cuenta atrás',
+    about:      'Descripción del evento',
+    highlights: 'Highlights',
+    calendar:   'Añadir al calendario',
+    agenda:     'Agenda',
+    speakers:   'Ponentes'
+  };
+  var SECTION_DEFAULT_ORDER = ['registro', 'countdown', 'about', 'highlights', 'calendar', 'agenda', 'speakers'];
+
+  function sectionOrderList() {
+    var order = Array.isArray(CONFIG.sectionOrder) ? CONFIG.sectionOrder.slice() : SECTION_DEFAULT_ORDER.slice();
+    SECTION_DEFAULT_ORDER.forEach(function (k) { if (order.indexOf(k) === -1) order.push(k); });
+    return order.filter(function (k) { return SECTION_LABELS[k]; });
+  }
+  function gripSvg() {
+    return '<span class="item__handle" title="Arrastra para reordenar"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg></span>';
+  }
+  function sectionsBlock() {
+    var rows = sectionOrderList().map(function (key) {
+      var on = !(CONFIG.sections && CONFIG.sections[key] === false);
+      return '<div class="item sec-row" data-section-key="' + key + '">' +
+        gripSvg() +
+        '<span class="item__title">' + escHtml(SECTION_LABELS[key]) + '</span>' +
+        '<input type="checkbox" class="switch" data-section-toggle="' + key + '"' + (on ? ' checked' : '') + '></div>';
+    }).join('');
+    return '<p class="field-grp" style="color:var(--muted);font-size:.82rem;margin-bottom:8px">Arrastra para reordenar las secciones. Usa el interruptor para mostrar u ocultar cada una. La cabecera y el pie quedan fijos.</p>' +
+      '<div class="items" data-sections-container>' + rows + '</div>';
+  }
+  function initSectionSortable() {
+    var c = qs('[data-sections-container]');
+    if (!c || !window.Sortable) return;
+    Sortable.create(c, {
+      handle: '.item__handle', animation: 150,
+      onEnd: function () {
+        CONFIG.sectionOrder = [].map.call(c.children, function (el) { return el.getAttribute('data-section-key'); });
+        change();
+      }
+    });
   }
   function listBlock(name, label, addLabel) {
     return '<div class="field-grp"><label>' + label + '</label>' +

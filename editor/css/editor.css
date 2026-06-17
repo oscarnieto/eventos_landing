@@ -140,6 +140,13 @@ h1,h2,h3{margin:0;letter-spacing:-.01em;}
 .switch:checked{background:var(--ok);}
 .switch:checked::after{transform:translateX(17px);}
 
+/* fila de sección reordenable (arrastrar + mostrar/ocultar) */
+.sec-row{display:flex;align-items:center;gap:10px;padding:11px 12px;}
+.sec-row .item__title{flex:1;font-weight:600;font-size:.9rem;}
+.sec-row .item__handle{cursor:grab;color:#9ca3af;display:flex;touch-action:none;}
+.sec-row.sortable-ghost{opacity:.4;}
+.sec-row.sortable-chosen{box-shadow:0 4px 14px rgba(0,0,0,.12);}
+
 /* uploader de logo (fondo oscuro, imagen contenida) */
 .uploader--logo{background:#2c2d31;border-color:#3a3b40;}
 .uploader--logo .uploader__txt{color:#aeb2ba;}

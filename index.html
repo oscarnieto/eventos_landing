@@ -91,33 +91,43 @@
     </div>
   </section>
 
-  <!-- ============ INFO PANEL ============ -->
-  <section class="info panel" id="evento">
+  <!-- ============ COUNTDOWN ============ -->
+  <section class="info panel" data-section="countdown">
     <div class="info__inner">
-
-      <!-- countdown -->
-      <div class="clock reveal" id="clock" data-section="countdown" data-target="2026-06-25T09:30:00">
+      <div class="clock reveal" id="clock" data-target="2026-06-25T09:30:00">
         <div class="clock__unit"><span class="clock__num" data-unit="days">00</span><span class="clock__lbl">días</span></div>
         <div class="clock__unit"><span class="clock__num" data-unit="hours">00</span><span class="clock__lbl">horas</span></div>
         <div class="clock__unit"><span class="clock__num" data-unit="mins">00</span><span class="clock__lbl">minutos</span></div>
         <div class="clock__unit"><span class="clock__num" data-unit="secs">00</span><span class="clock__lbl">segundos</span></div>
       </div>
+    </div>
+  </section>
 
-      <!-- event name + description -->
+  <!-- ============ DESCRIPCIÓN DEL EVENTO ============ -->
+  <section class="info panel" id="evento" data-section="about">
+    <div class="info__inner">
       <div class="about reveal">
         <h2 class="sec-title" data-bind="event.name">El futuro de las oficinas</h2>
         <p class="about__desc" data-bind="event.description">Una mañana junto a Savills Research y los protagonistas del sector para leer el mercado de oficinas con datos: ocupación, rentas prime, flexibilidad y el peso de la sostenibilidad en cada decisión de inversión. Plazas limitadas y sin coste de inscripción.</p>
       </div>
+    </div>
+  </section>
 
-      <!-- highlights pill -->
-      <dl class="highlights reveal" data-section="highlights" data-list="highlights" data-item-class="highlights__item">
+  <!-- ============ HIGHLIGHTS ============ -->
+  <section class="info panel" data-section="highlights">
+    <div class="info__inner">
+      <dl class="highlights reveal" data-list="highlights" data-item-class="highlights__item">
         <div class="highlights__item"><dt>25 jun 2026</dt><dd>Fecha</dd></div>
         <div class="highlights__item"><dt>09:30 – 14:00h</dt><dd>Hora</dd></div>
         <div class="highlights__item"><dt>Castellana 81, Madrid</dt><dd>Lugar</dd></div>
       </dl>
+    </div>
+  </section>
 
-      <!-- add to calendar -->
-      <div class="block" id="calendario" data-section="calendar">
+  <!-- ============ AÑADIR AL CALENDARIO ============ -->
+  <section class="info panel" id="calendario" data-section="calendar">
+    <div class="info__inner">
+      <div class="block">
         <h2 class="sec-title reveal">Añadir al calendario</h2>
         <div class="calbtns reveal d1">
           <button class="calbtn" data-cal="outlook">
@@ -128,15 +138,23 @@
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.9c0-2 1.6-2.9 1.7-3-1-1.4-2.4-1.6-2.9-1.6-1.3-.1-2.4.7-3 .7-.6 0-1.6-.7-2.6-.7-1.4 0-2.6.8-3.3 2-1.4 2.4-.4 6 1 7.9.7.9 1.4 2 2.4 1.9.9 0 1.3-.6 2.4-.6 1.1 0 1.4.6 2.4.6 1 0 1.6-.9 2.3-1.8.7-1 1-2 1-2-.1 0-2-.7-2-3.4ZM14.6 6.3c.5-.6.8-1.5.7-2.3-.7 0-1.6.5-2.1 1.1-.5.5-.9 1.4-.8 2.2.8.1 1.6-.4 2.2-1Z"/></svg>Apple Calendar</button>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- agenda -->
-      <div class="block" id="agenda" data-section="agenda">
+  <!-- ============ AGENDA ============ -->
+  <section class="info panel" id="agenda" data-section="agenda">
+    <div class="info__inner">
+      <div class="block">
         <h2 class="sec-title reveal">Agenda</h2>
         <div class="stats" id="stats"><!-- cards injected --></div>
       </div>
+    </div>
+  </section>
 
-      <!-- speakers -->
-      <div class="block" id="ponentes" data-section="speakers">
+  <!-- ============ PONENTES ============ -->
+  <section class="info panel" id="ponentes" data-section="speakers">
+    <div class="info__inner">
+      <div class="block">
         <h2 class="sec-title reveal">Ponentes</h2>
         <div class="speakers" data-list="speakers">
           <figure class="spk reveal">
@@ -153,7 +171,6 @@
           </figure>
         </div>
       </div>
-
     </div>
   </section>
 

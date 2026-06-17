@@ -24,13 +24,18 @@ window.EVENT_CONFIG = {
 
   /* Visibilidad de secciones (false = oculta) */
   sections: {
+    registro:   true,
     countdown:  true,
+    about:      true,
     highlights: true,
     calendar:   true,
     agenda:     true,
-    speakers:   true,
-    registro:   true
+    speakers:   true
   },
+
+  /* Orden de las secciones en la página (de arriba abajo).
+     La cabecera siempre va primera y el pie siempre último. */
+  sectionOrder: ['registro', 'countdown', 'about', 'highlights', 'calendar', 'agenda', 'speakers'],
 
   hero: {
     eventLogo: '',          // imagen de logo del evento ('' = logo por defecto)
