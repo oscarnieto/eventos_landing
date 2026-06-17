@@ -220,11 +220,14 @@
 
     // render de las listas
     Object.keys(LISTS).forEach(renderList);
-    initSectionSortable();
 
-    // acordeón
+    // acordeón — el Sortable de secciones se inicia al abrir por primera vez,
+    // ya que Sortable necesita que el contenedor esté visible para funcionar
     panel.querySelectorAll('.section__head').forEach(function (h) {
-      h.addEventListener('click', function () { h.parentNode.classList.toggle('open'); });
+      h.addEventListener('click', function () {
+        h.parentNode.classList.toggle('open');
+        if (h.parentNode.classList.contains('open')) initSectionSortable();
+      });
     });
   }
 
@@ -314,9 +317,12 @@
   }
   function initSectionSortable() {
     var c = qs('[data-sections-container]');
-    if (!c || !window.Sortable) return;
-    Sortable.create(c, {
-      handle: '.item__handle', animation: 150,
+    if (!c || !window.Sortable || c._sortable) return;
+    c._sortable = Sortable.create(c, {
+      handle: '.item__handle',
+      filter: 'input,button',
+      preventOnFilter: false,
+      animation: 150,
       onEnd: function () {
         CONFIG.sectionOrder = [].map.call(c.children, function (el) { return el.getAttribute('data-section-key'); });
         change();
