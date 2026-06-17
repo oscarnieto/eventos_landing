@@ -36,9 +36,59 @@
         <div><dt>Madrid · Castellana 81</dt><dd>Lugar</dd></div>
       </dl>
     </div>
-    <a class="hero__scroll-hint" href="#evento" aria-label="Ir a la información del evento">
+    <a class="hero__scroll-hint" href="#registro" aria-label="Ir al formulario de registro">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
     </a>
+  </section>
+
+  <!-- ============ REGISTRO PANEL ============ -->
+  <section class="registro panel" id="registro" data-section="registro">
+    <div class="registro__bg" data-bind-bg="registro.backgroundImage" aria-hidden="true"></div>
+    <div class="registro__inner">
+      <h2 class="sec-title reveal" data-bind="form.title">Formulario de registro</h2>
+
+      <form class="form reveal d1" id="reg-form" novalidate>
+        <div class="form__body">
+          <div class="form__fields" data-fields>
+            <div class="field">
+              <label for="f-name">Nombre y apellidos <span class="req">*</span></label>
+              <input id="f-name" name="name" type="text" placeholder="Ana García López" autocomplete="name" required>
+              <span class="field__err">Indícanos tu nombre y apellidos.</span>
+            </div>
+            <div class="form__row">
+              <div class="field">
+                <label for="f-company">Compañía <span class="req">*</span></label>
+                <input id="f-company" name="company" type="text" placeholder="Tu empresa" autocomplete="organization" required>
+                <span class="field__err">¿En qué compañía trabajas?</span>
+              </div>
+              <div class="field">
+                <label for="f-role">Cargo <span class="req">*</span></label>
+                <input id="f-role" name="role" type="text" placeholder="Director de Inmuebles" autocomplete="organization-title" required>
+                <span class="field__err">Indícanos tu cargo.</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-email">Email corporativo <span class="req">*</span></label>
+              <input id="f-email" name="email" type="email" placeholder="nombre@empresa.com" autocomplete="email" required>
+              <span class="field__err">Introduce un email corporativo válido.</span>
+            </div>
+            <div class="field">
+              <label for="f-notes">Notas <span class="opt">(opcional)</span></label>
+              <textarea id="f-notes" name="notes" placeholder="¿Alguna necesidad de accesibilidad, dieta o tema que te gustaría tratar?"></textarea>
+              <span class="field__err"></span>
+            </div>
+          </div>
+          <button type="submit" class="form__submit" data-bind="form.submitLabel">Completar registro</button>
+          <p class="form__legal" data-bind-html="form.legal">Al registrarte aceptas la <a href="#">política de privacidad</a> de Savills. Usaremos tus datos únicamente para gestionar tu asistencia a este evento.</p>
+        </div>
+        <div class="form__success">
+          <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m20 6-11 11L4 12"/></svg></span>
+          <h3 data-bind="form.successTitle">¡Plaza reservada!</h3>
+          <p id="success-msg" data-bind="form.successMessage">Gracias, te hemos enviado la confirmación a tu email. Nos vemos el 25 de junio.</p>
+          <button type="button" class="calbtn" id="reset-form" data-bind="form.resetLabel" style="border-radius:8px;">Registrar a otra persona</button>
+        </div>
+      </form>
+    </div>
   </section>
 
   <!-- ============ INFO PANEL ============ -->
@@ -104,56 +154,6 @@
         </div>
       </div>
 
-    </div>
-  </section>
-
-  <!-- ============ REGISTRO PANEL ============ -->
-  <section class="registro panel" id="registro" data-section="registro">
-    <div class="registro__bg" data-bind-bg="registro.backgroundImage" aria-hidden="true"></div>
-    <div class="registro__inner">
-      <h2 class="sec-title reveal" data-bind="form.title">Formulario de registro</h2>
-
-      <form class="form reveal d1" id="reg-form" novalidate>
-        <div class="form__body">
-          <div class="form__fields" data-fields>
-            <div class="field">
-              <label for="f-name">Nombre y apellidos <span class="req">*</span></label>
-              <input id="f-name" name="name" type="text" placeholder="Ana García López" autocomplete="name" required>
-              <span class="field__err">Indícanos tu nombre y apellidos.</span>
-            </div>
-            <div class="form__row">
-              <div class="field">
-                <label for="f-company">Compañía <span class="req">*</span></label>
-                <input id="f-company" name="company" type="text" placeholder="Tu empresa" autocomplete="organization" required>
-                <span class="field__err">¿En qué compañía trabajas?</span>
-              </div>
-              <div class="field">
-                <label for="f-role">Cargo <span class="req">*</span></label>
-                <input id="f-role" name="role" type="text" placeholder="Director de Inmuebles" autocomplete="organization-title" required>
-                <span class="field__err">Indícanos tu cargo.</span>
-              </div>
-            </div>
-            <div class="field">
-              <label for="f-email">Email corporativo <span class="req">*</span></label>
-              <input id="f-email" name="email" type="email" placeholder="nombre@empresa.com" autocomplete="email" required>
-              <span class="field__err">Introduce un email corporativo válido.</span>
-            </div>
-            <div class="field">
-              <label for="f-notes">Notas <span class="opt">(opcional)</span></label>
-              <textarea id="f-notes" name="notes" placeholder="¿Alguna necesidad de accesibilidad, dieta o tema que te gustaría tratar?"></textarea>
-              <span class="field__err"></span>
-            </div>
-          </div>
-          <button type="submit" class="form__submit" data-bind="form.submitLabel">Completar registro</button>
-          <p class="form__legal" data-bind-html="form.legal">Al registrarte aceptas la <a href="#">política de privacidad</a> de Savills. Usaremos tus datos únicamente para gestionar tu asistencia a este evento.</p>
-        </div>
-        <div class="form__success">
-          <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m20 6-11 11L4 12"/></svg></span>
-          <h3 data-bind="form.successTitle">¡Plaza reservada!</h3>
-          <p id="success-msg" data-bind="form.successMessage">Gracias, te hemos enviado la confirmación a tu email. Nos vemos el 25 de junio.</p>
-          <button type="button" class="calbtn" id="reset-form" data-bind="form.resetLabel" style="border-radius:8px;">Registrar a otra persona</button>
-        </div>
-      </form>
     </div>
   </section>
 
