@@ -63,7 +63,7 @@
 
     applyTheme(cfg.theme);
     applySections(cfg.sections);
-    applySectionOrder(cfg.sectionOrder);
+    applyInfoOrder(cfg.infoOrder);
     renderHighlights(cfg.highlights);
     if (cfg.speakers) renderSpeakers(cfg.speakers);
     if (cfg.form && cfg.form.fields) { renderFields(cfg.form.fields); bindFormInputs(); }
@@ -133,24 +133,21 @@
     });
   }
 
-  /* reordena las secciones de la página según cfg.sectionOrder.
-     La cabecera (hero) queda siempre primera y el pie siempre último;
-     el resto se coloca, en orden, justo antes del pie. */
-  function applySectionOrder(order) {
+  /* reordena los apartados DENTRO del bloque "Información del evento"
+     según cfg.infoOrder (about, countdown, highlights, agenda, speakers).
+     Los apartados no listados se mantienen al final, en su secuencia. */
+  function applyInfoOrder(order) {
     if (!Array.isArray(order) || !order.length) return;
-    var page = document.querySelector('.page');
-    if (!page) return;
-    var footer = page.querySelector('.footer');
+    var box = document.querySelector('[data-info-blocks]');
+    if (!box) return;
     var seen = {};
-    // primero, las secciones listadas en el orden indicado…
     order.forEach(function (key) {
-      var el = page.querySelector('section[data-section="' + key + '"]');
-      if (el && !seen[key]) { page.insertBefore(el, footer); seen[key] = true; }
+      var el = box.querySelector('[data-block="' + key + '"]');
+      if (el && !seen[key]) { box.appendChild(el); seen[key] = true; }
     });
-    // …y al final, cualquier sección no incluida en el orden (conserva su secuencia)
-    [].slice.call(page.querySelectorAll('section[data-section]')).forEach(function (el) {
-      var key = el.getAttribute('data-section');
-      if (!seen[key]) { page.insertBefore(el, footer); seen[key] = true; }
+    [].slice.call(box.querySelectorAll('[data-block]')).forEach(function (el) {
+      var key = el.getAttribute('data-block');
+      if (!seen[key]) { box.appendChild(el); seen[key] = true; }
     });
   }
 
@@ -430,15 +427,40 @@
       if (!ok) { if (first) first.focus(); return; }
       var nameInput = form.querySelector('#f-name');
       var name = (nameInput ? nameInput.value || '' : '').trim().split(' ')[0];
-      var msg = document.getElementById('success-msg');
-      if (name && msg) msg.textContent = 'Gracias ' + name + ', te hemos enviado la confirmación a tu email. Nos vemos pronto.';
-      form.classList.add('done');
+      var msg = document.getElementById('thanks-msg');
+      if (name && msg) msg.textContent = 'Gracias ' + name + '. ' + thanksBaseMsg;
+      openThanks();
     });
     var reset = document.getElementById('reset-form');
     if (reset) reset.addEventListener('click', function () {
       form.reset();
       form.querySelectorAll('.field').forEach(function (f) { f.classList.remove('invalid'); });
-      form.classList.remove('done');
+      closeThanks();
     });
   })();
+
+  /* ---------- Popup de gracias (tras el registro) ---------- */
+  var thanksModal = document.getElementById('thanks-modal');
+  var thanksMsgEl = document.getElementById('thanks-msg');
+  var thanksBaseMsg = thanksMsgEl ? thanksMsgEl.textContent : '';
+  function openThanks() {
+    if (!thanksModal) return;
+    thanksModal.hidden = false;
+    requestAnimationFrame(function () { thanksModal.classList.add('show'); });
+    document.documentElement.classList.add('modal-open');
+  }
+  function closeThanks() {
+    if (!thanksModal) return;
+    thanksModal.classList.remove('show');
+    document.documentElement.classList.remove('modal-open');
+    setTimeout(function () { thanksModal.hidden = true; }, 260);
+  }
+  if (thanksModal) {
+    thanksModal.addEventListener('click', function (e) {
+      if (e.target.closest('[data-thanks-close]')) closeThanks();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !thanksModal.hidden) closeThanks();
+    });
+  }
 })();

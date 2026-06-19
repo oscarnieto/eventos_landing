@@ -170,7 +170,7 @@
   function buildPanel() {
     var panel = qs('#panel');
     if (!CONFIG.sections) CONFIG.sections = {};
-    if (!Array.isArray(CONFIG.sectionOrder)) CONFIG.sectionOrder = sectionOrderList();
+    if (!Array.isArray(CONFIG.infoOrder)) CONFIG.infoOrder = infoOrderList();
     panel.innerHTML =
       section('Estilo y colores', icoPalette(),
         colorField('theme.accent', 'Color de acento', 'Subtítulo, etiquetas, botones, detalles') +
@@ -284,35 +284,40 @@
         '<input class="input color-hex" data-path="' + path + '" data-color-hex="1" value="' + escHtml(v) + '">' +
       '</div></div>';
   }
-  /* --- secciones reordenables de la landing --- */
+  /* --- apartados reordenables DENTRO de "Información del evento" --- */
   var SECTION_LABELS = {
-    registro:   'Formulario de registro',
-    countdown:  'Cuenta atrás',
-    about:      'Descripción del evento',
+    about:      'Información del evento',
+    countdown:  'Cuenta regresiva',
     highlights: 'Highlights',
-    calendar:   'Añadir al calendario',
     agenda:     'Agenda',
     speakers:   'Ponentes'
   };
-  var SECTION_DEFAULT_ORDER = ['registro', 'countdown', 'about', 'highlights', 'calendar', 'agenda', 'speakers'];
+  var INFO_DEFAULT_ORDER = ['about', 'countdown', 'highlights', 'agenda', 'speakers'];
 
-  function sectionOrderList() {
-    var order = Array.isArray(CONFIG.sectionOrder) ? CONFIG.sectionOrder.slice() : SECTION_DEFAULT_ORDER.slice();
-    SECTION_DEFAULT_ORDER.forEach(function (k) { if (order.indexOf(k) === -1) order.push(k); });
+  function infoOrderList() {
+    var order = Array.isArray(CONFIG.infoOrder) ? CONFIG.infoOrder.slice() : INFO_DEFAULT_ORDER.slice();
+    INFO_DEFAULT_ORDER.forEach(function (k) { if (order.indexOf(k) === -1) order.push(k); });
     return order.filter(function (k) { return SECTION_LABELS[k]; });
   }
   function gripSvg() {
     return '<span class="item__handle" title="Arrastra para reordenar"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/><circle cx="15" cy="18" r="1.6"/></svg></span>';
   }
   function sectionsBlock() {
-    var rows = sectionOrderList().map(function (key) {
+    var formOn = !(CONFIG.sections && CONFIG.sections.registro === false);
+    var formToggle = '<label class="toggle-row"><span>Formulario de registro</span>' +
+      '<input type="checkbox" class="switch" data-section-toggle="registro"' + (formOn ? ' checked' : '') + '></label>';
+
+    var rows = infoOrderList().map(function (key) {
       var on = !(CONFIG.sections && CONFIG.sections[key] === false);
       return '<div class="item sec-row" data-section-key="' + key + '">' +
         gripSvg() +
         '<span class="item__title">' + escHtml(SECTION_LABELS[key]) + '</span>' +
         '<input type="checkbox" class="switch" data-section-toggle="' + key + '"' + (on ? ' checked' : '') + '></div>';
     }).join('');
-    return '<p class="field-grp" style="color:var(--muted);font-size:.82rem;margin-bottom:8px">Arrastra para reordenar las secciones. Usa el interruptor para mostrar u ocultar cada una. La cabecera y el pie quedan fijos.</p>' +
+
+    return formToggle +
+      '<p class="field-grp" style="color:var(--muted);font-size:.82rem;margin:14px 0 8px">' +
+        '<strong style="color:var(--ink)">Información del evento</strong><br>Arrastra para reordenar los apartados dentro de este bloque. El interruptor muestra u oculta cada uno.</p>' +
       '<div class="items" data-sections-container>' + rows + '</div>';
   }
   function initSectionSortable() {
@@ -324,7 +329,7 @@
       preventOnFilter: false,
       animation: 150,
       onEnd: function () {
-        CONFIG.sectionOrder = [].map.call(c.children, function (el) { return el.getAttribute('data-section-key'); });
+        CONFIG.infoOrder = [].map.call(c.children, function (el) { return el.getAttribute('data-section-key'); });
         change();
       }
     });

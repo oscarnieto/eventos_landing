@@ -25,17 +25,16 @@ window.EVENT_CONFIG = {
   /* Visibilidad de secciones (false = oculta) */
   sections: {
     registro:   true,
-    countdown:  true,
     about:      true,
+    countdown:  true,
     highlights: true,
-    calendar:   true,
     agenda:     true,
     speakers:   true
   },
 
-  /* Orden de las secciones en la página (de arriba abajo).
-     La cabecera siempre va primera y el pie siempre último. */
-  sectionOrder: ['registro', 'countdown', 'about', 'highlights', 'calendar', 'agenda', 'speakers'],
+  /* Orden de los apartados DENTRO del bloque "Información del evento".
+     El formulario de registro va arriba y el pie siempre al final. */
+  infoOrder: ['about', 'countdown', 'highlights', 'agenda', 'speakers'],
 
   hero: {
     eventLogo: '',          // imagen de logo del evento ('' = logo por defecto)
@@ -84,8 +83,8 @@ window.EVENT_CONFIG = {
     title: 'Formulario de registro',
     submitLabel: 'Completar registro',
     legal: 'Al registrarte aceptas la <a href="#">política de privacidad</a> de Savills. Usaremos tus datos únicamente para gestionar tu asistencia a este evento.',
-    successTitle: '¡Plaza reservada!',
-    successMessage: 'Gracias, te hemos enviado la confirmación a tu email. Nos vemos el 25 de junio.',
+    successTitle: '¡Gracias por registrarte!',
+    successMessage: 'Te hemos enviado la confirmación a tu email. Nos vemos el 25 de junio.',
     resetLabel: 'Registrar a otra persona',
     fields: [
       { name: 'name',    type: 'text',     label: 'Nombre y apellidos', placeholder: 'Ana García López',     required: true,  width: 'full', autocomplete: 'name' },
